@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    <s:String x:Key="about">About</s:String>
+    <s:String x:Key="title">MemoBird</s:String>
+    <s:String x:Key="text">Text</s:String>
+    <s:String x:Key="image">Image</s:String>
+    <s:String x:Key="jigsaw">Jigsaw</s:String>
+    <s:String x:Key="device">Device</s:String>
+</ResourceDictionary>
