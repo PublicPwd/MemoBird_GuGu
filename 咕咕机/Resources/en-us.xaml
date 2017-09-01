@@ -7,4 +7,9 @@
     <s:String x:Key="image">Image</s:String>
     <s:String x:Key="jigsaw">Jigsaw</s:String>
     <s:String x:Key="device">Device</s:String>
+    <s:String x:Key="version">MemoBird Version:2017.09.1</s:String>
+    <s:String x:Key="ok">OK</s:String>
+    <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
+    <s:String x:Key="information">Based on the official open source library, not the ofiicial version</s:String>
+    <s:String x:Key="url">open source library</s:String>
 </ResourceDictionary>

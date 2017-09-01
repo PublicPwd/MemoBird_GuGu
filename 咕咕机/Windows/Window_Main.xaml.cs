@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MemoBird.Windows;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -119,6 +120,12 @@ namespace MemoBird
         private void label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
+        }
+
+        private void label_About_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window_About window_About = new Window_About();
+            window_About.ShowDialog();
         }
 
         #endregion
