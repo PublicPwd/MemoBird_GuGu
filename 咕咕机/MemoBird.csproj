@@ -7,7 +7,7 @@
     <ProjectGuid>{C85488A0-BB15-4026-B195-C706FF23B557}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>咕咕机</RootNamespace>
+    <RootNamespace>MemoBird</RootNamespace>
     <AssemblyName>咕咕机</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -58,7 +58,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\Window_About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Window_Main.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,8 +70,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Classes\GGConfig.cs" />
+    <Compile Include="Utils\Apis.cs" />
+    <Compile Include="Utils\ggApiHelper.cs" />
+    <Compile Include="Utils\HttpWebResponseUtility.cs" />
+    <Compile Include="Windows\Window_About.xaml.cs">
+      <DependentUpon>Window_About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Window_Main.xaml.cs">
+      <DependentUpon>Window_Main.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\zh-cn.xaml">
@@ -99,6 +110,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

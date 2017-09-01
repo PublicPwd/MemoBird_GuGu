@@ -6,11 +6,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace 咕咕机
+namespace MemoBird
 {
-    public partial class MainWindow : Window
+    public partial class Window_Main : Window
     {
-        public MainWindow()
+        public Window_Main()
         {
             InitializeComponent();
         }
