@@ -1,0 +1,14 @@
+﻿<Window x:Class="MemoBird.Windows.Window_DeviceDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window_DeviceDetails" Height="200" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6" ResizeMode="NoResize" BorderBrush="#FF576069" BorderThickness="1,0,1,1">
+    <Grid Height="30" VerticalAlignment="Top" DockPanel.Dock="Top" Background="#FF576069" MouseDown="Grid_MouseDown">
+        <Button x:Name="button_Close" Content="X" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="20" Height="20" Background="#FFF3F4F6" Click="button_Close_Click" BorderBrush="{x:Null}"/>
+        <Label Content="{DynamicResource name}" HorizontalAlignment="Left" Height="30" Margin="15,55,0,-55" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="{DynamicResource id}" HorizontalAlignment="Left" Height="30" Margin="16,94,0,-94" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="textBox_Name" HorizontalAlignment="Left" Height="25" Margin="90,60,0,-55" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <TextBox x:Name="textBox_Id" HorizontalAlignment="Left" Height="25" Margin="90,99,0,-94" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <Button x:Name="button_OK" Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="61,147,0,-147" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_OK_Click"/>
+        <Button x:Name="button_Cancel" Content="{DynamicResource cancel}" HorizontalAlignment="Left" Margin="165,147,0,-147" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_Close_Click"/>
+    </Grid>
+</Window>

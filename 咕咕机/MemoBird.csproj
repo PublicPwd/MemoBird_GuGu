@@ -54,11 +54,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\Page_Device.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Image.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Text.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\en-us.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Page_TextAndImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Window_About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Window_DeviceDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,12 +90,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\GGConfig.cs" />
-    <Compile Include="Utils\Apis.cs" />
-    <Compile Include="Utils\ggApiHelper.cs" />
-    <Compile Include="Utils\HttpWebResponseUtility.cs" />
+    <Compile Include="APIs\GGConfig.cs" />
+    <Compile Include="Classes\DeviceDetails.cs" />
+    <Compile Include="Classes\DeviceList.cs" />
+    <Compile Include="Classes\ProgramInfo.cs" />
+    <Compile Include="Pages\Page_Device.xaml.cs">
+      <DependentUpon>Page_Device.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Image.xaml.cs">
+      <DependentUpon>Page_Image.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Text.xaml.cs">
+      <DependentUpon>Page_Text.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="APIs\Apis.cs" />
+    <Compile Include="APIs\ggApiHelper.cs" />
+    <Compile Include="APIs\HttpWebResponseUtility.cs" />
+    <Compile Include="Pages\Page_TextAndImage.xaml.cs">
+      <DependentUpon>Page_TextAndImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\FileX.cs" />
     <Compile Include="Windows\Window_About.xaml.cs">
       <DependentUpon>Window_About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Window_DeviceDetails.xaml.cs">
+      <DependentUpon>Window_DeviceDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Window_Main.xaml.cs">
       <DependentUpon>Window_Main.xaml</DependentUpon>

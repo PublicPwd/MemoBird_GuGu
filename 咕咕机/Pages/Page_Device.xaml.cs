@@ -1,0 +1,85 @@
+﻿using MemoBird.Classes;
+using MemoBird.Windows;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace MemoBird.Pages
+{
+    public partial class Page_Device : Page
+    {
+        public Page_Device()
+        {
+            InitializeComponent();
+        }
+
+        #region Public Function
+
+        /// <summary>
+        /// 往 DataGrid 中填充设备信息
+        /// </summary>
+        public void FillContent()
+        {
+            foreach (string name in DeviceList.id.Keys)
+            {
+                this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = name, col2 = DeviceList.id[name] } });
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void button_Add_Click(object sender, RoutedEventArgs e)
+        {
+            new Window_DeviceDetails().ShowDialog();
+
+            if(DeviceDetails.deviceName.Length==0)
+            {
+                return;
+            }
+
+            this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = DeviceDetails.deviceName, col2 = DeviceDetails.deviceId } });
+        }
+
+        private void button_Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = this.dataGrid_DeviceList.SelectedItem;
+            DataRowView dataRowView = item as DataRowView;
+            string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            string id = (this.dataGrid_DeviceList.Columns[1].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
+
+            new Window_DeviceDetails(name, id).ShowDialog();
+
+            if (DeviceDetails.deviceName.Length == 0)
+            {
+                return;
+            }
+
+            (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceName;
+            (this.dataGrid_DeviceList.Columns[1].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceId;
+        }
+
+        private void button_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            var item = this.dataGrid_DeviceList.SelectedItem;
+            string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            DeviceList.id.Remove(name);
+            this.dataGrid_DeviceList.Items.Remove(item);
+        }
+
+        #endregion
+    }
+}

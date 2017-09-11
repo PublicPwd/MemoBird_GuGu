@@ -1,6 +1,9 @@
-﻿using MemoBird.Windows;
+﻿using MemoBird.Pages;
+using MemoBird.Utils;
+using MemoBird.Windows;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -11,9 +14,17 @@ namespace MemoBird
 {
     public partial class Window_Main : Window
     {
+        private Page_Text page_Text = new Page_Text();
+        private Page_Image page_Image = new Page_Image();
+        private Page_TextAndImage page_TextAndImage = new Page_TextAndImage();
+        private Page_Device page_Device = new Page_Device();
+
         public Window_Main()
         {
             InitializeComponent();
+            this.fram_Pages.Content = page_Text;
+            FileX.LoadDeviceList();
+            page_Device.FillContent();
         }
 
         #region Private Function
@@ -35,6 +46,36 @@ namespace MemoBird
             label.Foreground = brush;
 
             grid_Nav.Margin = new Thickness(label.Margin.Left, 45, 0, 0);
+
+            brush = null;
+        }
+
+        /// <summary>
+        /// 更改软件显示的语言
+        /// </summary>
+        private void ChangeTheLanguage()
+        {
+            string requestedCulture = string.Empty;
+            if (this.label_Language.Content.Equals("English"))
+            {
+                requestedCulture = @"Resources\en-us.xaml";
+                this.label_Language.Content = "简体中文";
+            }
+            else
+            {
+                requestedCulture = @"Resources\zh-cn.xaml";
+                this.label_Language.Content = "English";
+            }
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+            ResourceDictionary resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
+            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            requestedCulture = string.Empty;
         }
 
         #endregion
@@ -71,61 +112,51 @@ namespace MemoBird
 
         private void label_About_MouseEnter(object sender, MouseEventArgs e)
         {
-            this.label_About.Content = this.FindResource("about");
+            this.label_About.Content = FindResource("about");
         }
 
         private void label_About_MouseLeave(object sender, MouseEventArgs e)
         {
-            this.label_About.Content = this.FindResource("title");
+            this.label_About.Content = FindResource("title");
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string requestedCulture = string.Empty;
-            if (this.label_Language.Content.Equals("English"))
-            {
-                requestedCulture = @"Resources\en-us.xaml";
-                this.label_Language.Content = "简体中文";
-            }
-            else
-            {
-                requestedCulture = @"Resources\zh-cn.xaml";
-                this.label_Language.Content = "English";
-            }
-            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
-            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
-            {
-                dictionaryList.Add(dictionary);
-            }
-            ResourceDictionary resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
-            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            this.ChangeTheLanguage();
         }
 
         private void label_Text_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
+            this.fram_Pages.Content = page_Text;
         }
 
         private void label_Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
+            this.fram_Pages.Content = page_Image;
         }
 
         private void label_TextAndImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
+            this.fram_Pages.Content = page_TextAndImage;
         }
 
         private void label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
+            this.fram_Pages.Content = page_Device;
         }
 
         private void label_About_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Window_About window_About = new Window_About();
-            window_About.ShowDialog();
+            new Window_About().ShowDialog();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            FileX.SaveDeviceList();
         }
 
         #endregion
