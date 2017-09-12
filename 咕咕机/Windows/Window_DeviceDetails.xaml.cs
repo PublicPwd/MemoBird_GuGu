@@ -50,7 +50,6 @@ namespace MemoBird.Windows
                 MessageBox.Show(FindResource("pleaseinputdeviceid").ToString());
                 return;
             }
-
             if(DeviceList.id.ContainsKey(this.textBox_Name.Text))
             {
                 MessageBox.Show(FindResource("thisnamehasexist").ToString());

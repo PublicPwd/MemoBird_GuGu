@@ -8,7 +8,7 @@
 	Title="Page_Device">
 
     <Grid>
-        <DataGrid x:Name="dataGrid_DeviceList" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Height="400" Width="597" GridLinesVisibility="Horizontal" FontSize="16">
+        <DataGrid x:Name="dataGrid_DeviceList" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Height="400" Width="600" GridLinesVisibility="Horizontal" FontSize="16">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding col1}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource name}" Width="290" CanUserResize="False"/>
                 <DataGridTextColumn Binding="{Binding col2}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource id}" Width="290" CanUserResize="False"/>

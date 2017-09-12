@@ -25,6 +25,7 @@ namespace MemoBird
             this.fram_Pages.Content = page_Text;
             FileX.LoadDeviceList();
             page_Device.FillContent();
+            page_Text.FillContnet();
         }
 
         #region Private Function
@@ -46,6 +47,8 @@ namespace MemoBird
             label.Foreground = brush;
 
             grid_Nav.Margin = new Thickness(label.Margin.Left, 45, 0, 0);
+
+            page_Text.FillContnet();
 
             brush = null;
         }

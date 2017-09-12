@@ -22,4 +22,6 @@
     <s:String x:Key="thisnamehasexist">这个名称已存在！</s:String>
     <s:String x:Key="pleaseinputdevicename">请输入设备名称！</s:String>
     <s:String x:Key="pleaseinputdeviceid">请输入设备编号！</s:String>
+    <s:String x:Key="send">发送</s:String>
+    <s:String x:Key="pleaseinputcontent">请输入需要打印的内容！</s:String>
 </ResourceDictionary>

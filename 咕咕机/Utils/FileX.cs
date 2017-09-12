@@ -43,18 +43,18 @@ namespace MemoBird.Utils
             {
                 return;
             }
-
             XmlDocument xmlDocument = new XmlDocument();
             XmlNode xmlNode = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
             xmlDocument.AppendChild(xmlNode);
-            xmlNode = xmlDocument.CreateElement("Device");
+            xmlNode = xmlDocument.CreateElement("Devices");
             xmlDocument.AppendChild(xmlNode);
-            XmlNode childNode = null;
+            XmlElement childElement = null;
             foreach (String key in DeviceList.id.Keys)
             {
-                childNode = xmlDocument.CreateElement(key);
-                childNode.InnerText = DeviceList.id[key];
-                xmlNode.AppendChild(childNode);
+                childElement = xmlDocument.CreateElement("Device");
+                childElement.SetAttribute("Name", key);
+                childElement.InnerText = DeviceList.id[key];
+                xmlNode.AppendChild(childElement);
             }
             try
             {
@@ -68,7 +68,7 @@ namespace MemoBird.Utils
             {
                 xmlDocument = null;
                 xmlNode = null;
-                childNode = null;
+                childElement = null;
             }
         }
 
@@ -92,13 +92,16 @@ namespace MemoBird.Utils
                 MessageBox.Show(ex.Message);
             }
             XmlNode xmlNode = xmlDocument.LastChild;
+            XmlElement xmlElement = null;
             for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
             {
-                DeviceList.id.Add(xmlNode.ChildNodes[i].Name, xmlNode.ChildNodes[i].InnerText);
+                xmlElement = xmlNode.ChildNodes[i] as XmlElement;
+                DeviceList.id.Add(xmlElement.GetAttribute("Name"), xmlElement.InnerText);
             }
 
             xmlDocument = null;
             xmlNode = null;
+            xmlElement = null;
         }
     }
 }

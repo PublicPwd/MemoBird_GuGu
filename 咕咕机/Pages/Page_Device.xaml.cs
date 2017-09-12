@@ -32,10 +32,15 @@ namespace MemoBird.Pages
         /// </summary>
         public void FillContent()
         {
+            if (!DeviceList.deviceListChanged)
+            {
+                return;
+            }
             foreach (string name in DeviceList.id.Keys)
             {
                 this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = name, col2 = DeviceList.id[name] } });
             }
+            DeviceList.deviceListChanged = false;
         }
 
         #endregion
@@ -52,6 +57,8 @@ namespace MemoBird.Pages
             }
 
             this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = DeviceDetails.deviceName, col2 = DeviceDetails.deviceId } });
+
+            DeviceList.deviceListChanged = true;
         }
 
         private void button_Edit_Click(object sender, RoutedEventArgs e)
@@ -70,6 +77,8 @@ namespace MemoBird.Pages
 
             (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceName;
             (this.dataGrid_DeviceList.Columns[1].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceId;
+
+            DeviceList.deviceListChanged = true;
         }
 
         private void button_Remove_Click(object sender, RoutedEventArgs e)
@@ -78,6 +87,8 @@ namespace MemoBird.Pages
             string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
             DeviceList.id.Remove(name);
             this.dataGrid_DeviceList.Items.Remove(item);
+
+            DeviceList.deviceListChanged = true;
         }
 
         #endregion

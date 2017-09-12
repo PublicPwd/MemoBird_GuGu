@@ -5,9 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-	Title="Page_Text" Background="#FF01A5F7">
+	Title="Page_Text">
 
     <Grid>
-        
+        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,400,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_DeviceList" HorizontalAlignment="Left" Margin="72,405,0,0" VerticalAlignment="Top" Width="553" Height="25" FontSize="16"/>
+        <Button x:Name="button_Send" Content="{DynamicResource send}" HorizontalAlignment="Left" Margin="660,50,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_Send_Click"/>
+        <TextBox x:Name="textBox_Content" HorizontalAlignment="Left" Height="370" Margin="25,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" AcceptsReturn="True" FontSize="16"/>
     </Grid>
 </Page>

@@ -11,7 +11,7 @@
     <s:String x:Key="ok">OK</s:String>
     <s:String x:Key="cancel">Cancel</s:String>
     <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
-    <s:String x:Key="information">Based on the official open source library</s:String>
+    <s:String x:Key="information">Based on official open source library</s:String>
     <s:String x:Key="url">open source library</s:String>
     <s:String x:Key="name">Device Name</s:String>
     <s:String x:Key="id">Device ID</s:String>
@@ -22,4 +22,6 @@
     <s:String x:Key="thisnamehasexist">This name has exist!</s:String>
     <s:String x:Key="pleaseinputdevicename">Please input device name!</s:String>
     <s:String x:Key="pleaseinputdeviceid">Please input device ID!</s:String>
+    <s:String x:Key="send">Send</s:String>
+    <s:String x:Key="pleaseinputcontent">Please input content!</s:String>
 </ResourceDictionary>
