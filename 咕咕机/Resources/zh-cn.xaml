@@ -24,4 +24,6 @@
     <s:String x:Key="pleaseinputdeviceid">请输入设备编号！</s:String>
     <s:String x:Key="send">发送</s:String>
     <s:String x:Key="pleaseinputcontent">请输入需要打印的内容！</s:String>
+    <s:String x:Key="shiftup">上移</s:String>
+    <s:String x:Key="shiftdown">下移</s:String>
 </ResourceDictionary>

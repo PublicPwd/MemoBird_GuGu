@@ -24,4 +24,6 @@
     <s:String x:Key="pleaseinputdeviceid">Please input device ID!</s:String>
     <s:String x:Key="send">Send</s:String>
     <s:String x:Key="pleaseinputcontent">Please input content!</s:String>
+    <s:String x:Key="shiftup">Shift Up</s:String>
+    <s:String x:Key="shiftdown">Shift Down</s:String>
 </ResourceDictionary>

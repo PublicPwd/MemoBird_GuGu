@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoBird.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,25 @@ namespace MemoBird.Pages
         public Page_Image()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 往 ComboBox 中填充设备列表
+        /// </summary>
+        public void FillContnet()
+        {
+            this.comboBox_DeviceList.Items.Clear();
+
+            if (DeviceList.id.Count == 0)
+            {
+                return;
+            }
+
+            foreach (string name in DeviceList.id.Keys)
+            {
+                this.comboBox_DeviceList.Items.Add(name);
+            }
+            this.comboBox_DeviceList.SelectedIndex = 0;
         }
     }
 }
