@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace MemoBird.Pages
 {
-    /// <summary>
-    /// Page_Image.xaml 的交互逻辑
-    /// </summary>
     public partial class Page_Image : Page
     {
         public Page_Image()

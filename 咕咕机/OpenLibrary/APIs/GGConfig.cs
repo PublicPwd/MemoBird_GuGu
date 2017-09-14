@@ -1,5 +1,5 @@
 ﻿
-namespace MemoBird.APIs
+namespace MemoBird.OpenLibrary.APIs
 {
     public static class GGConfig
     {

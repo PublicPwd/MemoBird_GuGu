@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MemoBird.APIs
+namespace MemoBird.OpenLibrary.APIs
 {
     public class Apis
     {
