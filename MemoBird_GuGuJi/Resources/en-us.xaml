@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    <s:String x:Key="about">About</s:String>
+    <s:String x:Key="title">MemoBird</s:String>
+    <s:String x:Key="text">Text</s:String>
+    <s:String x:Key="image">Image</s:String>
+    <s:String x:Key="jigsaw">T And I</s:String>
+    <s:String x:Key="device">Device</s:String>
+    <s:String x:Key="version">MemoBird Version:2017.09.1</s:String>
+    <s:String x:Key="ok">OK</s:String>
+    <s:String x:Key="cancel">Cancel</s:String>
+    <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
+    <s:String x:Key="information">Based on official open source library</s:String>
+    <s:String x:Key="url">open source library</s:String>
+    <s:String x:Key="name">Name</s:String>
+    <s:String x:Key="id">ID</s:String>
+    <s:String x:Key="default">Default</s:String>
+    <s:String x:Key="add">Add</s:String>
+    <s:String x:Key="edit">Edit</s:String>
+    <s:String x:Key="remove">Remove</s:String>
+    <s:String x:Key="thisnamehasexist">This name has exist!</s:String>
+    <s:String x:Key="pleaseinputdevicename">Please input device name!</s:String>
+    <s:String x:Key="pleaseinputdeviceid">Please input device ID!</s:String>
+    <s:String x:Key="send">Send</s:String>
+    <s:String x:Key="pleaseaddcontent">Please add content!</s:String>
+    <s:String x:Key="shiftup">Shift Up</s:String>
+    <s:String x:Key="shiftdown">Shift Down</s:String>
+</ResourceDictionary>

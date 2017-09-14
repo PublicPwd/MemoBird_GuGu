@@ -1,0 +1,11 @@
+﻿<Window x:Class="MemoBird_GuGuJi.Windows.Window_AddText"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window_AddText" Height="200" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6" ResizeMode="NoResize" BorderBrush="#FF576069" BorderThickness="1,0,1,1">
+    <Grid Height="30" VerticalAlignment="Top" DockPanel.Dock="Top" Background="#FF576069" MouseDown="Grid_MouseDown">
+        <Button x:Name="button_Close" Content="X" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="20" Height="20" Background="#FFF3F4F6" Click="button_Close_Click" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox_Content" HorizontalAlignment="Left" Height="35" Margin="30,75,0,-80" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" FontSize="16"/>
+        <Button x:Name="button_OK" Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="61,147,0,-147" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_OK_Click"/>
+        <Button x:Name="button_Cancel" Content="{DynamicResource cancel}" HorizontalAlignment="Left" Margin="165,147,0,-147" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_Close_Click"/>
+    </Grid>
+</Window>
