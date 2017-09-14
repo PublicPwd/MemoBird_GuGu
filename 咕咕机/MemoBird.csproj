@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Utils\FileX.cs" />
     <Compile Include="OpenLibrary\Utils\ImageHelper.cs" />
+    <Compile Include="Utils\Parsing.cs" />
     <Compile Include="Windows\Window_About.xaml.cs">
       <DependentUpon>Window_About.xaml</DependentUpon>
     </Compile>

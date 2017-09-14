@@ -1,5 +1,6 @@
 ﻿using MemoBird.Classes;
 using MemoBird.OpenLibrary.APIs;
+using MemoBird.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,19 +53,9 @@ namespace MemoBird.Pages
 
         #region Private Function
 
-        private string getUserIDFromJsonString(string str, string field)
-        {
-            int index = str.IndexOf(field);
-            string value = str.Substring(index, str.Length - index).Replace(field + "\":", string.Empty);
-            if (value[0].Equals('\"'))
-            {
-                value = value.Substring(1, value.Length - 1);
-            }
-            char[] parms = { ',', '\"', '}' };
-            value = value.Substring(0, value.IndexOfAny(parms));
-            return value;
-        }
-
+        /// <summary>
+        /// 打印文字
+        /// </summary>
         private void PrintPaper()
         {
             this.button_Send.Dispatcher.Invoke(new Action(delegate
@@ -79,12 +70,12 @@ namespace MemoBird.Pages
                     content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(this.textBox_Content.Text));
                     memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
                     str = ggApiHelper.UserBind(memobirdID, "0");
-                    str = ggApiHelper.PrintPaper(memobirdID, this.getUserIDFromJsonString(str, "showapi_userid"), content);
-                    printcontentid = this.getUserIDFromJsonString(str, "printcontentid");
+                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                    printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
                     while (true)
                     {
                         str = ggApiHelper.GetPrintStatus(printcontentid);
-                        if (this.getUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
+                        if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                         {
                             break;
                         }
@@ -116,7 +107,7 @@ namespace MemoBird.Pages
         {
             if (this.textBox_Content.Text.Length == 0)
             {
-                MessageBox.Show(FindResource("pleaseinputcontent").ToString());
+                MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
             Thread _thread = new Thread(new ThreadStart(PrintPaper));

@@ -1,4 +1,5 @@
 ﻿using MemoBird.Classes;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -102,6 +103,19 @@ namespace MemoBird.Utils
             xmlDocument = null;
             xmlNode = null;
             xmlElement = null;
+        }
+
+        /// <summary>
+        /// 弹出文件选择窗口
+        /// </summary>
+        /// <returns>选择的文件列表</returns>
+        public static string[] GetFileBrowserSelectedPath(bool multiselect)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = multiselect;
+            openFileDialog.Filter = "JPEG|*.jpg|PNG|*.png|BMP|*.bmp|ALL|*.*";
+            openFileDialog.ShowDialog();
+            return openFileDialog.FileNames;
         }
     }
 }
