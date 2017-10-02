@@ -103,6 +103,11 @@
     <Compile Include="Classes\DeviceDetails.cs" />
     <Compile Include="Classes\DeviceList.cs" />
     <Compile Include="Classes\ProgramInfo.cs" />
+    <Compile Include="OpenLibrary\QRCoder\AbstractQRCode.cs" />
+    <Compile Include="OpenLibrary\QRCoder\QRCode.cs" />
+    <Compile Include="OpenLibrary\QRCoder\QRCodeData.cs" />
+    <Compile Include="OpenLibrary\QRCoder\QRCodeGenerator.cs" />
+    <Compile Include="OpenLibrary\QRCoder\QRCoderHelper.cs" />
     <Compile Include="Pages\Page_Device.xaml.cs">
       <DependentUpon>Page_Device.xaml</DependentUpon>
     </Compile>

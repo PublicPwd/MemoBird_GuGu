@@ -6,8 +6,9 @@
         <Label Content="{DynamicResource version}" HorizontalAlignment="Left" Margin="33,30,0,0" FontSize="20" VerticalAlignment="Top"/>
         <Label Content="" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" BorderThickness="0,1,0,0" BorderBrush="#FF576069" Foreground="{x:Null}" Width="427"/>
         <Button Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="385,235,0,0" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Click"/>
-        <Label Content="{DynamicResource memobirdid}" HorizontalAlignment="Left" Margin="50,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="{DynamicResource information}" HorizontalAlignment="Left" Margin="50,110,0,0" VerticalAlignment="Top"/>
-        <Label Content="{DynamicResource url}" HorizontalAlignment="Left" Margin="50,239,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" MouseDown="Label_MouseDown" Foreground="Blue"/>
+        <Label Content="{DynamicResource memobirdid}" HorizontalAlignment="Left" Margin="33,70,0,0" VerticalAlignment="Top"/>
+        <Label Content="{DynamicResource thanks}" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_url1" Content="{DynamicResource url1}" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="label_url1_MouseDown"/>
+        <Label x:Name="label_url2" Content="{DynamicResource url2}" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="label_url2_MouseDown"/>
     </Grid>
 </Window>

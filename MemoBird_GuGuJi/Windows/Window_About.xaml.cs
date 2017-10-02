@@ -24,9 +24,14 @@ namespace MemoBird_GuGuJi.Windows
             this.Close();
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        private void label_url1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("https://github.com/memobird");
+            Process.Start("https://github.com/memobird/gugu-.net");
+        }
+
+        private void label_url2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/codebude/QRCoder");
         }
     }
 }

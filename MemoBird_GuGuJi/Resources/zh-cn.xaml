@@ -7,12 +7,13 @@
     <s:String x:Key="image">图片</s:String>
     <s:String x:Key="jigsaw">拼接</s:String>
     <s:String x:Key="device">设备</s:String>
-    <s:String x:Key="version">咕咕机 版本：2017.09.1</s:String>
+    <s:String x:Key="version">咕咕机 版本：2017.10.1</s:String>
     <s:String x:Key="ok">确认</s:String>
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
-    <s:String x:Key="information">本软件是作者基于咕咕机官方开源库开发</s:String>
-    <s:String x:Key="url">咕咕机开源库</s:String>
+    <s:String x:Key="thanks">感谢：</s:String>
+    <s:String x:Key="url1">gugu-.net</s:String>
+    <s:String x:Key="url2">QRCoder</s:String>
     <s:String x:Key="name">设备名称</s:String>
     <s:String x:Key="id">设备编号</s:String>
     <s:String x:Key="default">设为默认</s:String>
@@ -26,4 +27,5 @@
     <s:String x:Key="pleaseaddcontent">请添加需要打印的内容！</s:String>
     <s:String x:Key="shiftup">上移</s:String>
     <s:String x:Key="shiftdown">下移</s:String>
+    <s:String x:Key="qrcode">二维码</s:String>
 </ResourceDictionary>

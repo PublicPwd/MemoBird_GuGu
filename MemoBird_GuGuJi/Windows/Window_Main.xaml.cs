@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -37,13 +36,13 @@ namespace MemoBird_GuGuJi
         /// <param name="currentLabel">当前点击的选项卡</param>
         private void HightLightTheCurrentTab(object currentLabel)
         {
-            SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(0xF3, 0xF4, 0xF6));
+            SolidColorBrush brush = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xF3, 0xF4, 0xF6));
             this.label_Text.Foreground = brush;
             this.label_Image.Foreground = brush;
             this.label_TextAndImage.Foreground = brush;
             this.label_Device.Foreground = brush;
 
-            brush = new SolidColorBrush(Color.FromRgb(0xF7, 0x44, 0x61));
+            brush = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xF7, 0x44, 0x61));
             Label label = currentLabel as Label;
             label.Foreground = brush;
 

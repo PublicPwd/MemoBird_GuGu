@@ -7,12 +7,13 @@
     <s:String x:Key="image">Image</s:String>
     <s:String x:Key="jigsaw">T And I</s:String>
     <s:String x:Key="device">Device</s:String>
-    <s:String x:Key="version">MemoBird Version:2017.09.1</s:String>
+    <s:String x:Key="version">MemoBird Version:2017.10.1</s:String>
     <s:String x:Key="ok">OK</s:String>
     <s:String x:Key="cancel">Cancel</s:String>
     <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
-    <s:String x:Key="information">Based on official open source library</s:String>
-    <s:String x:Key="url">open source library</s:String>
+    <s:String x:Key="thanks">Thanks:</s:String>
+    <s:String x:Key="url1">gugu-.net</s:String>
+    <s:String x:Key="url2">QRCoder</s:String>
     <s:String x:Key="name">Name</s:String>
     <s:String x:Key="id">ID</s:String>
     <s:String x:Key="default">Default</s:String>
@@ -26,4 +27,5 @@
     <s:String x:Key="pleaseaddcontent">Please add content!</s:String>
     <s:String x:Key="shiftup">Shift Up</s:String>
     <s:String x:Key="shiftdown">Shift Down</s:String>
+    <s:String x:Key="qrcode">QRCode</s:String>
 </ResourceDictionary>
