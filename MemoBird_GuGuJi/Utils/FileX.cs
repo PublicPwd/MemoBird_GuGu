@@ -36,10 +36,6 @@ namespace MemoBird_GuGuJi.Utils
         /// </summary>
         public static void SaveDeviceList()
         {
-            if (DeviceList.id.Count == 0)
-            {
-                return;
-            }
             XmlDocument xmlDocument = new XmlDocument();
             XmlNode xmlNode = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
             xmlDocument.AppendChild(xmlNode);

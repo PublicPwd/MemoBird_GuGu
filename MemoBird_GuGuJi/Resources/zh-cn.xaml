@@ -7,7 +7,7 @@
     <s:String x:Key="image">图片</s:String>
     <s:String x:Key="jigsaw">拼接</s:String>
     <s:String x:Key="device">设备</s:String>
-    <s:String x:Key="version">咕咕机 版本：2017.10.1</s:String>
+    <s:String x:Key="version">咕咕机 版本：2017.10.2</s:String>
     <s:String x:Key="ok">确认</s:String>
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
@@ -28,4 +28,5 @@
     <s:String x:Key="shiftup">上移</s:String>
     <s:String x:Key="shiftdown">下移</s:String>
     <s:String x:Key="qrcode">二维码</s:String>
+    <s:String x:Key="pleaseadddevice">无可用设备，请在设备页面中添加设备</s:String>
 </ResourceDictionary>

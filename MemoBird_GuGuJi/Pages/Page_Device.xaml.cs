@@ -51,6 +51,10 @@ namespace MemoBird_GuGuJi.Pages
 
         private void button_Edit_Click(object sender, RoutedEventArgs e)
         {
+            if (this.dataGrid_DeviceList.Items.Count == 0)
+            {
+                return;
+            }
             var item = this.dataGrid_DeviceList.SelectedItem;
             DataRowView dataRowView = item as DataRowView;
             string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
@@ -71,6 +75,10 @@ namespace MemoBird_GuGuJi.Pages
 
         private void button_Remove_Click(object sender, RoutedEventArgs e)
         {
+            if (this.dataGrid_DeviceList.Items.Count == 0)
+            {
+                return;
+            }
             var item = this.dataGrid_DeviceList.SelectedItem;
             string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
             DeviceList.id.Remove(name);

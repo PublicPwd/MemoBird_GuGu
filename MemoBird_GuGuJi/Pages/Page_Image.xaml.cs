@@ -123,6 +123,11 @@ namespace MemoBird_GuGuJi.Pages
 
         private void button_Send_Click(object sender, RoutedEventArgs e)
         {
+            if (this.comboBox_DeviceList.Items.Count == 0)
+            {
+                MessageBox.Show(FindResource("pleaseadddevice").ToString());
+                return;
+            }
             if (this.listBox_ImageList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
