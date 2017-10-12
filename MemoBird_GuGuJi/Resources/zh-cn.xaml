@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
     <s:String x:Key="about">关于</s:String>
-    <s:String x:Key="title">咕咕机</s:String>
-    <s:String x:Key="text">文字</s:String>
+    <s:String x:Key="title">咕咕</s:String>
+    <s:String x:Key="text">文本</s:String>
     <s:String x:Key="image">图片</s:String>
     <s:String x:Key="jigsaw">拼接</s:String>
     <s:String x:Key="device">设备</s:String>
-    <s:String x:Key="version">咕咕机 版本：2017.10.2</s:String>
+    <s:String x:Key="version">咕咕 版本：20.17.10.2</s:String>
     <s:String x:Key="ok">确认</s:String>
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
@@ -29,4 +29,7 @@
     <s:String x:Key="shiftdown">下移</s:String>
     <s:String x:Key="qrcode">二维码</s:String>
     <s:String x:Key="pleaseadddevice">无可用设备，请在设备页面中添加设备</s:String>
+    <s:String x:Key="telephone">电话</s:String>
+    <s:String x:Key="website">网址</s:String>
+    <s:String x:Key="email">邮件</s:String>
 </ResourceDictionary>

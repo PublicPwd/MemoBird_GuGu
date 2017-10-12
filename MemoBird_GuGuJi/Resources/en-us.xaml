@@ -7,7 +7,7 @@
     <s:String x:Key="image">Image</s:String>
     <s:String x:Key="jigsaw">T And I</s:String>
     <s:String x:Key="device">Device</s:String>
-    <s:String x:Key="version">MemoBird Version:2017.10.2</s:String>
+    <s:String x:Key="version">MemoBird Version:20.17.10.2</s:String>
     <s:String x:Key="ok">OK</s:String>
     <s:String x:Key="cancel">Cancel</s:String>
     <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
@@ -29,4 +29,7 @@
     <s:String x:Key="shiftdown">Shift Down</s:String>
     <s:String x:Key="qrcode">QRCode</s:String>
     <s:String x:Key="pleaseadddevice">No available device, please add device info in the device page</s:String>
+    <s:String x:Key="telephone">Phone</s:String>
+    <s:String x:Key="website">WebSite</s:String>
+    <s:String x:Key="email">E-Mail</s:String>
 </ResourceDictionary>

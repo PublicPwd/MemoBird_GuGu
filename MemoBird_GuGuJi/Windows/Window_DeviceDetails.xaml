@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MemoBird_GuGuJi.Windows.Window_DeviceDetails"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Window_DeviceDetails" Height="200" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6" ResizeMode="NoResize" BorderBrush="#FF576069" BorderThickness="1,0,1,1">
+        Title="{DynamicResource device}" Height="200" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6" ResizeMode="NoResize" BorderBrush="#FF576069" BorderThickness="1,0,1,1">
     <Grid Height="30" VerticalAlignment="Top" DockPanel.Dock="Top" Background="#FF576069" MouseDown="Grid_MouseDown">
         <Button x:Name="button_Close" Content="X" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="20" Height="20" Background="#FFF3F4F6" Click="button_Close_Click" BorderBrush="{x:Null}"/>
         <Label Content="{DynamicResource name}" HorizontalAlignment="Left" Height="30" Margin="15,55,0,-55" VerticalAlignment="Top" FontSize="16"/>

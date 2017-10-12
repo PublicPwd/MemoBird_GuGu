@@ -1,5 +1,4 @@
-﻿
-namespace MemoBird_GuGuJi.Utils
+﻿namespace MemoBird_GuGuJi.Utils
 {
     class Parsing
     {

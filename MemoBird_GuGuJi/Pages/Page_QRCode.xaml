@@ -1,0 +1,22 @@
+﻿<Page x:Class="MemoBird_GuGuJi.Pages.Page_QRCode"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <ComboBox x:Name="comboBox_Type" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Width="100" Height="25" FontSize="16" SelectedIndex="0" SelectionChanged="comboBox_Type_SelectionChanged">
+            <ComboBoxItem Content="{DynamicResource text}" Tag=""/>
+            <ComboBoxItem Content="{DynamicResource telephone}" Tag="tel:"/>
+            <ComboBoxItem Content="{DynamicResource website}" Tag="urlto:"/>
+            <ComboBoxItem Content="{DynamicResource email}" Tag="mailto:"/>
+        </ComboBox>
+        <TextBox x:Name="textBox_Content" HorizontalAlignment="Left" Height="25" Margin="130,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="495" FontSize="16" TextChanged="textBox_Content_TextChanged"/>
+        <Button x:Name="button_Send" Content="{DynamicResource send}" HorizontalAlignment="Left" Margin="660,50,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_Send_Click"/>
+        <TextBox x:Name="textBox_QRCode" HorizontalAlignment="Left" Height="340" Margin="25,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" AcceptsReturn="True" FontSize="16" Background="White" IsEnabled="False"/>
+        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,400,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_DeviceList" HorizontalAlignment="Left" Margin="90,405,0,0" VerticalAlignment="Top" Width="535" Height="25" FontSize="16"/>
+    </Grid>
+</Page>

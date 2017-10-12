@@ -1,22 +1,27 @@
 ﻿using MemoBird_GuGuJi.Classes;
 using MemoBird_GuGuJi.OpenLibrary.ggApi;
+using MemoBird_GuGuJi.OpenLibrary.QRCoder;
 using MemoBird_GuGuJi.Utils;
 using System;
-using System.Text;
+using System.Drawing;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MemoBird_GuGuJi.Pages
 {
-    public partial class Page_Text : Page
+    public partial class Page_QRCode : Page
     {
-        public Page_Text()
+        private Bitmap qrCode = null;
+
+        public Page_QRCode()
         {
             InitializeComponent();
         }
 
-        #region Public Function
+        #region Private Function
 
         /// <summary>
         /// 往 ComboBox 中填充设备列表
@@ -37,12 +42,19 @@ namespace MemoBird_GuGuJi.Pages
             this.comboBox_DeviceList.SelectedIndex = 0;
         }
 
-        #endregion
-
-        #region Private Function
+        /// <summary>
+        /// 生成二维码
+        /// </summary>
+        private void GenerateQRCode()
+        {
+            this.qrCode = QRCoderHelper.Generate(this.textBox_Content.Tag + this.textBox_Content.Text);
+            IntPtr intPtr = this.qrCode.GetHbitmap();
+            BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            this.textBox_QRCode.Background = new ImageBrush(bitmapSource);
+        }
 
         /// <summary>
-        /// 打印文字
+        /// 打印二维码
         /// </summary>
         private void PrintPaper()
         {
@@ -52,11 +64,11 @@ namespace MemoBird_GuGuJi.Pages
                 string memobirdID;
                 string str;
                 string printcontentid;
-                this.textBox_Content.IsEnabled = false;
                 this.button_Send.IsEnabled = false;
+                this.comboBox_Type.IsEnabled = false;
                 try
                 {
-                    content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(this.textBox_Content.Text));
+                    content = "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(this.qrCode);
                     memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
                     str = ggApiHelper.UserBind(memobirdID, "0");
                     str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
@@ -77,9 +89,10 @@ namespace MemoBird_GuGuJi.Pages
                 }
                 finally
                 {
-                    this.textBox_Content.IsEnabled = true;
-                    this.textBox_Content.Text = string.Empty;
                     this.button_Send.IsEnabled = true;
+                    this.comboBox_Type.IsEnabled = true;
+                    this.textBox_Content.Text = string.Empty;
+                    this.textBox_QRCode.Background = null;
 
                     content = string.Empty;
                     memobirdID = string.Empty;
@@ -93,14 +106,28 @@ namespace MemoBird_GuGuJi.Pages
 
         #region Event Handlers
 
+        private void textBox_Content_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.GenerateQRCode();
+        }
+
+        private void comboBox_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.textBox_Content != null)
+            {
+                this.textBox_Content.Text = string.Empty;
+                this.textBox_QRCode.Background = null;
+            }
+        }
+
         private void button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if (this.comboBox_DeviceList.Items.Count == 0)
+            if(this.comboBox_DeviceList.Items.Count==0)
             {
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if (this.textBox_Content.Text.Length == 0)
+            if(this.textBox_Content.Text.Length==0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
@@ -108,7 +135,7 @@ namespace MemoBird_GuGuJi.Pages
             Thread _thread = new Thread(new ThreadStart(PrintPaper));
             _thread.Start();
         }
-        
+
         #endregion
     }
 }

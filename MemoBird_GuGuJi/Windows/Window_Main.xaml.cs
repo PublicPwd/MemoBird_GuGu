@@ -15,16 +15,18 @@ namespace MemoBird_GuGuJi
         private Page_Text page_Text = new Page_Text();
         private Page_Image page_Image = new Page_Image();
         private Page_TextAndImage page_TextAndImage = new Page_TextAndImage();
+        private Page_QRCode page_QRCode = new Page_QRCode();
         private Page_Device page_Device = new Page_Device();
 
         public Window_Main()
         {
             InitializeComponent();
-            this.fram_Pages.Content = page_Text;
+            this.frame_Pages.Content = page_Text;
             FileX.LoadDeviceList();
             page_Device.FillContent();
             page_Text.FillContnet();
             page_Image.FillContnet();
+            page_QRCode.FillContnet();
             page_TextAndImage.FillContent();
         }
 
@@ -40,6 +42,7 @@ namespace MemoBird_GuGuJi
             this.label_Text.Foreground = brush;
             this.label_Image.Foreground = brush;
             this.label_TextAndImage.Foreground = brush;
+            this.label_QRCode.Foreground = brush;
             this.label_Device.Foreground = brush;
 
             brush = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xF7, 0x44, 0x61));
@@ -51,6 +54,7 @@ namespace MemoBird_GuGuJi
             page_Text.FillContnet();
             page_Image.FillContnet();
             page_TextAndImage.FillContent();
+            page_QRCode.FillContnet();
 
             brush = null;
         }
@@ -133,25 +137,31 @@ namespace MemoBird_GuGuJi
         private void label_Text_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
-            this.fram_Pages.Content = page_Text;
+            this.frame_Pages.Content = page_Text;
         }
 
         private void label_Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
-            this.fram_Pages.Content = page_Image;
+            this.frame_Pages.Content = page_Image;
         }
 
         private void label_TextAndImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
-            this.fram_Pages.Content = page_TextAndImage;
+            this.frame_Pages.Content = page_TextAndImage;
+        }
+
+        private void label_QRCode_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.HightLightTheCurrentTab(sender);
+            this.frame_Pages.Content = page_QRCode;
         }
 
         private void label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HightLightTheCurrentTab(sender);
-            this.fram_Pages.Content = page_Device;
+            this.frame_Pages.Content = page_Device;
         }
 
         private void label_About_MouseDown(object sender, MouseButtonEventArgs e)
