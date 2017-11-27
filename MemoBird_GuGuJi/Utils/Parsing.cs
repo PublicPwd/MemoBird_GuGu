@@ -16,8 +16,7 @@
             {
                 value = value.Substring(1, value.Length - 1);
             }
-            char[] parms = { ',', '\"', '}' };
-            value = value.Substring(0, value.IndexOfAny(parms));
+            value = value.Substring(0, value.IndexOfAny(new char[] { ',', '\"', '}' }));
             return value;
         }
     }

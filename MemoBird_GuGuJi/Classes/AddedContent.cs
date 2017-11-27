@@ -5,6 +5,6 @@
         /// <summary>
         /// 添加的文本
         /// </summary>
-        public static string text = string.Empty;
+        public static string Text { get; set; }
     }
 }

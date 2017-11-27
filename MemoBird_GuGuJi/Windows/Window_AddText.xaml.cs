@@ -15,20 +15,20 @@ namespace MemoBird_GuGuJi.Windows
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                this.DragMove();
+                DragMove();
             }
         }
 
-        private void button_Close_Click(object sender, RoutedEventArgs e)
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
-            AddedContent.text = string.Empty;
-            this.Close();
+            AddedContent.Text = string.Empty;
+            Close();
         }
 
-        private void button_OK_Click(object sender, RoutedEventArgs e)
+        private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            AddedContent.text = this.textBox_Content.Text;
-            this.Close();
+            AddedContent.Text = TextBox_Content.Text;
+            Close();
         }
     }
 }

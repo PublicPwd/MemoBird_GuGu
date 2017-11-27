@@ -22,18 +22,18 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         public void FillContnet()
         {
-            this.comboBox_DeviceList.Items.Clear();
+            ComboBox_DeviceList.Items.Clear();
 
-            if (DeviceList.id.Count == 0)
+            if (DeviceList.Id.Count == 0)
             {
                 return;
             }
 
-            foreach (string name in DeviceList.id.Keys)
+            foreach (string name in DeviceList.Id.Keys)
             {
-                this.comboBox_DeviceList.Items.Add(name);
+                ComboBox_DeviceList.Items.Add(name);
             }
-            this.comboBox_DeviceList.SelectedIndex = 0;
+            ComboBox_DeviceList.SelectedIndex = 0;
         }
 
         #endregion
@@ -45,125 +45,108 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         private void PrintPaper()
         {
-            this.button_Send.Dispatcher.Invoke(new Action(delegate
+            string content = string.Empty;
+            string memobirdID;
+            string str;
+            string printcontentid;
+            System.Drawing.Image image = null;
+            try
             {
-                string content = string.Empty;
-                string memobirdID;
-                string str;
-                string printcontentid;
-                System.Drawing.Image image = null;
-                foreach (object obj in this.grid.Children)
+                for (int i = 0; i < ListBox_ImageList.Items.Count; i++)
                 {
-                    if (obj is Button)
+                    if (i != 0)
                     {
-                        (obj as Button).IsEnabled = false;
+                        content = content + "|";
                     }
+                    image = System.Drawing.Image.FromFile(ListBox_ImageList.Items[i].ToString());
+                    content = content + "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(image);
                 }
-                try
+                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                str = ggApiHelper.UserBind(memobirdID, "0");
+                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
+                while (true)
                 {
-                    for (int i = 0; i < this.listBox_ImageList.Items.Count; i++)
+                    str = ggApiHelper.GetPrintStatus(printcontentid);
+                    if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
-                        if (i != 0)
-                        {
-                            content = content + "|";
-                        }
-                        image = System.Drawing.Image.FromFile(this.listBox_ImageList.Items[i].ToString());
-                        content = content + "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(image);
+                        break;
                     }
-                    memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
-                    str = ggApiHelper.UserBind(memobirdID, "0");
-                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                    printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
-                    while (true)
-                    {
-                        str = ggApiHelper.GetPrintStatus(printcontentid);
-                        if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
-                        {
-                            break;
-                        }
-                        Thread.Sleep(1000);
-                    }
+                    Thread.Sleep(1000);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    foreach (object obj in this.grid.Children)
-                    {
-                        if (obj is Button)
-                        {
-                            (obj as Button).IsEnabled = true;
-                        }
-                    }
-                    this.listBox_ImageList.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ListBox_ImageList.Items.Clear();
 
-                    content = string.Empty;
-                    memobirdID = string.Empty;
-                    str = string.Empty;
-                    printcontentid = string.Empty;
-                    image = null;
-                }
-            }));
+                content = string.Empty;
+                memobirdID = string.Empty;
+                str = string.Empty;
+                printcontentid = string.Empty;
+                image = null;
+                GC.Collect();
+            }
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void button_Add_Click(object sender, RoutedEventArgs e)
+        private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             string[] fileNames = FileX.GetFileBrowserSelectedPath(true);
             foreach (string fileName in fileNames)
             {
-                this.listBox_ImageList.Items.Add(fileName);
+                ListBox_ImageList.Items.Add(fileName);
             }
         }
 
-        private void button_Send_Click(object sender, RoutedEventArgs e)
+        private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if (this.comboBox_DeviceList.Items.Count == 0)
+            if (ComboBox_DeviceList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if (this.listBox_ImageList.Items.Count == 0)
+            if (ListBox_ImageList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
-            Thread _thread = new Thread(new ThreadStart(PrintPaper));
-            _thread.Start();
+            PrintPaper();
         }
 
-        private void button_ShiftUp_Click(object sender, RoutedEventArgs e)
+        private void Button_ShiftUp_Click(object sender, RoutedEventArgs e)
         {
-            if (this.listBox_ImageList.SelectedIndex > 0)
+            if (ListBox_ImageList.SelectedIndex > 0)
             {
-                object up = this.listBox_ImageList.SelectedItem;
-                object down = this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex - 1];
-                this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex - 1] = up;
-                this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex] = down;
-                this.listBox_ImageList.SelectedItem = up;
+                object up = ListBox_ImageList.SelectedItem;
+                object down = ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex - 1];
+                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex - 1] = up;
+                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex] = down;
+                ListBox_ImageList.SelectedItem = up;
             }
         }
 
-        private void button_ShiftDown_Click(object sender, RoutedEventArgs e)
+        private void Button_ShiftDown_Click(object sender, RoutedEventArgs e)
         {
-            if (this.listBox_ImageList.SelectedIndex < this.listBox_ImageList.Items.Count - 1)
+            if (ListBox_ImageList.SelectedIndex < ListBox_ImageList.Items.Count - 1)
             {
-                object down = this.listBox_ImageList.SelectedItem;
-                object up = this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex + 1];
-                this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex + 1] = down;
-                this.listBox_ImageList.Items[this.listBox_ImageList.SelectedIndex] = up;
-                this.listBox_ImageList.SelectedItem = down;
+                object down = ListBox_ImageList.SelectedItem;
+                object up = ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex + 1];
+                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex + 1] = down;
+                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex] = up;
+                ListBox_ImageList.SelectedItem = down;
             }
         }
 
-        private void button_Remove_Click(object sender, RoutedEventArgs e)
+        private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
-            this.listBox_ImageList.Items.Remove(this.listBox_ImageList.SelectedItem);
+            ListBox_ImageList.Items.Remove(ListBox_ImageList.SelectedItem);
         }
 
         #endregion

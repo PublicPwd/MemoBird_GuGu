@@ -10,20 +10,20 @@ namespace MemoBird_GuGuJi.Windows
         public Window_About()
         {
             InitializeComponent();
-            this.ShowLog();
+            ShowLog();
         }
 
         #region Private Function
 
         private void ShowLog()
         {
-            if (this.button_Submit.Content.Equals("OK"))
+            if (Button_Submit.Content.Equals("OK"))
             {
-                this.textBox_Log.Text = AboutInfo.log_en_us;
+                TextBox_Log.Text = AboutInfo.Log_en_us;
             }
             else
             {
-                this.textBox_Log.Text = AboutInfo.log_zh_cn;
+                TextBox_Log.Text = AboutInfo.Log_zh_cn;
             }
         }
 
@@ -35,21 +35,21 @@ namespace MemoBird_GuGuJi.Windows
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                this.DragMove();
+                DragMove();
             }
         }
 
-        private void button_Submit_Click(object sender, RoutedEventArgs e)
+        private void Button_Submit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
-        private void label_url1_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Label_url1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start(AboutInfo.guguURL);
+            Process.Start(AboutInfo.GuguURL);
         }
 
-        private void label_url2_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Label_url2_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Process.Start(AboutInfo.QRCoderURL);
         }

@@ -28,18 +28,18 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         public void FillContnet()
         {
-            this.comboBox_DeviceList.Items.Clear();
+            ComboBox_DeviceList.Items.Clear();
 
-            if (DeviceList.id.Count == 0)
+            if (DeviceList.Id.Count == 0)
             {
                 return;
             }
 
-            foreach (string name in DeviceList.id.Keys)
+            foreach (string name in DeviceList.Id.Keys)
             {
-                this.comboBox_DeviceList.Items.Add(name);
+                ComboBox_DeviceList.Items.Add(name);
             }
-            this.comboBox_DeviceList.SelectedIndex = 0;
+            ComboBox_DeviceList.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -47,10 +47,10 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         private void GenerateQRCode()
         {
-            this.qrCode = QRCoderHelper.Generate(this.textBox_Content.Tag + this.textBox_Content.Text);
-            IntPtr intPtr = this.qrCode.GetHbitmap();
+            qrCode = QRCoderHelper.Generate(TextBox_Content.Tag + TextBox_Content.Text);
+            IntPtr intPtr = qrCode.GetHbitmap();
             BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            this.textBox_QRCode.Background = new ImageBrush(bitmapSource);
+            TextBox_QRCode.Background = new ImageBrush(bitmapSource);
         }
 
         /// <summary>
@@ -58,82 +58,74 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         private void PrintPaper()
         {
-            this.button_Send.Dispatcher.Invoke(new Action(delegate
+            string content;
+            string memobirdID;
+            string str;
+            string printcontentid;
+            try
             {
-                string content;
-                string memobirdID;
-                string str;
-                string printcontentid;
-                this.button_Send.IsEnabled = false;
-                this.comboBox_Type.IsEnabled = false;
-                try
+                content = "P:" + ImageHelper.GetPoitImgBase64(qrCode);
+                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                str = ggApiHelper.UserBind(memobirdID, "0");
+                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
+                while (true)
                 {
-                    content = "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(this.qrCode);
-                    memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
-                    str = ggApiHelper.UserBind(memobirdID, "0");
-                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                    printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
-                    while (true)
+                    str = ggApiHelper.GetPrintStatus(printcontentid);
+                    if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
-                        str = ggApiHelper.GetPrintStatus(printcontentid);
-                        if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
-                        {
-                            break;
-                        }
-                        Thread.Sleep(1000);
+                        break;
                     }
+                    Thread.Sleep(1000);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    this.button_Send.IsEnabled = true;
-                    this.comboBox_Type.IsEnabled = true;
-                    this.textBox_Content.Text = string.Empty;
-                    this.textBox_QRCode.Background = null;
-
-                    content = string.Empty;
-                    memobirdID = string.Empty;
-                    str = string.Empty;
-                    printcontentid = string.Empty;
-                }
-            }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                TextBox_Content.Text = string.Empty;
+                TextBox_QRCode.Background = null;
+                content = string.Empty;
+                memobirdID = string.Empty;
+                str = string.Empty;
+                printcontentid = string.Empty;
+                GC.Collect();
+            }
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void textBox_Content_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_Content_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.GenerateQRCode();
         }
 
-        private void comboBox_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBox_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.textBox_Content != null)
+            if (TextBox_Content != null)
             {
-                this.textBox_Content.Text = string.Empty;
-                this.textBox_QRCode.Background = null;
+                TextBox_Content.Text = string.Empty;
+                TextBox_QRCode.Background = null;
             }
         }
 
-        private void button_Send_Click(object sender, RoutedEventArgs e)
+        private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if(this.comboBox_DeviceList.Items.Count==0)
+            if (ComboBox_DeviceList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if(this.textBox_Content.Text.Length==0)
+            if (TextBox_Content.Text.Length == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
-            Thread _thread = new Thread(new ThreadStart(PrintPaper));
-            _thread.Start();
+            PrintPaper();
         }
 
         #endregion

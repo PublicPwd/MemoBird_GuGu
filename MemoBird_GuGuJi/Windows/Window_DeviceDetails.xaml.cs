@@ -11,58 +11,56 @@ namespace MemoBird_GuGuJi.Windows
         public Window_DeviceDetails()
         {
             InitializeComponent();
-            this.oldName = string.Empty;
+            oldName = string.Empty;
         }
 
         public Window_DeviceDetails(string name, string id)
         {
             InitializeComponent();
-            this.oldName = name;
-            this.textBox_Name.Text = name;
-            this.textBox_Id.Text = id;
+            oldName = name;
+            TextBox_Name.Text = name;
+            TextBox_Id.Text = id;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                this.DragMove();
+                DragMove();
             }
         }
 
-        private void button_Close_Click(object sender, RoutedEventArgs e)
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.oldName = string.Empty;
-            DeviceDetails.deviceName = string.Empty;
-            DeviceDetails.deviceId = string.Empty;
-            this.Close();
+            oldName = string.Empty;
+            DeviceDetails.SetDeviceDetails(string.Empty, string.Empty);
+            Close();
         }
 
-        private void button_OK_Click(object sender, RoutedEventArgs e)
+        private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (this.textBox_Name.Text.Length == 0)
+            if (TextBox_Name.Text.Length == 0)
             {
                 MessageBox.Show(FindResource("pleaseinputdevicename").ToString());
                 return;
             }
-            if (this.textBox_Id.Text.Length == 0)
+            if (TextBox_Id.Text.Length == 0)
             {
                 MessageBox.Show(FindResource("pleaseinputdeviceid").ToString());
                 return;
             }
-            if (this.oldName.Length > 0)
+            if (oldName.Length > 0)
             {
-                DeviceList.id.Remove(this.oldName);
+                DeviceList.Id.Remove(oldName);
             }
-            if(DeviceList.id.ContainsKey(this.textBox_Name.Text))
+            if(DeviceList.Id.ContainsKey(TextBox_Name.Text))
             {
                 MessageBox.Show(FindResource("thisnamehasexist").ToString());
                 return;
             }
-            DeviceList.id.Add(this.textBox_Name.Text, this.textBox_Id.Text);
-            DeviceDetails.deviceName = this.textBox_Name.Text;
-            DeviceDetails.deviceId = this.textBox_Id.Text;
-            this.Close();
+            DeviceList.Id.Add(TextBox_Name.Text, TextBox_Id.Text);
+            DeviceDetails.SetDeviceDetails(TextBox_Name.Text, TextBox_Id.Text);
+            Close();
         }
     }
 }

@@ -23,18 +23,18 @@ namespace MemoBird_GuGuJi.Windows
         /// </summary>
         public void FillContent()
         {
-            this.comboBox_DeviceList.Items.Clear();
+            ComboBox_DeviceList.Items.Clear();
 
-            if (DeviceList.id.Count == 0)
+            if (DeviceList.Id.Count == 0)
             {
                 return;
             }
 
-            foreach (string name in DeviceList.id.Keys)
+            foreach (string name in DeviceList.Id.Keys)
             {
-                this.comboBox_DeviceList.Items.Add(name);
+                ComboBox_DeviceList.Items.Add(name);
             }
-            this.comboBox_DeviceList.SelectedIndex = 0;
+            ComboBox_DeviceList.SelectedIndex = 0;
         }
 
         #endregion
@@ -46,152 +46,134 @@ namespace MemoBird_GuGuJi.Windows
         /// </summary>
         private void PrintPaper()
         {
-            this.button_Send.Dispatcher.Invoke(new Action(delegate
+            string content = string.Empty;
+            string memobirdID;
+            string str;
+            string printcontentid;
+            string itemString;
+            char c;
+            System.Drawing.Image image = null;
+            try
             {
-                string content = string.Empty;
-                string memobirdID;
-                string str;
-                string printcontentid;
-                string itemString;
-                char c;
-                System.Drawing.Image image = null;
-                foreach (object obj in this.grid.Children)
+                for (int i = 0; i < ListBox_List.Items.Count; i++)
                 {
-                    if (obj is Button)
+                    itemString = ListBox_List.Items[i].ToString();
+                    c = itemString[0];
+                    itemString = itemString.Substring(2, itemString.Length - 2);
+                    if (i != 0)
                     {
-                        (obj as Button).IsEnabled = false;
+                        content = content + "|";
+                    }
+                    if (c == 'P')
+                    {
+                        image = System.Drawing.Image.FromFile(itemString);
+                        content = content + "P:" + ImageHelper.GetPoitImgBase64(image);
+                    }
+                    else
+                    {
+                        content = content + "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(itemString + "\n"));
                     }
                 }
-                try
+                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                str = ggApiHelper.UserBind(memobirdID, "0");
+                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
+                while (true)
                 {
-                    for (int i = 0; i < this.listBox_List.Items.Count; i++)
+                    str = ggApiHelper.GetPrintStatus(printcontentid);
+                    if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
-                        itemString = this.listBox_List.Items[i].ToString();
-                        c = itemString[0];
-                        itemString = itemString.Substring(2, itemString.Length - 2);
-                        if (i != 0)
-                        {
-                            content = content + "|";
-                        }
-                        if (c == 'P')
-                        {
-                            image = System.Drawing.Image.FromFile(itemString);
-                            content = content + "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(image);
-                        }
-                        else
-                        {
-                            content = content + "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(itemString));
-                        }
+                        break;
                     }
-                    memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
-                    str = ggApiHelper.UserBind(memobirdID, "0");
-                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                    printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
-                    while (true)
-                    {
-                        str = ggApiHelper.GetPrintStatus(printcontentid);
-                        if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
-                        {
-                            break;
-                        }
-                        Thread.Sleep(1000);
-                    }
+                    Thread.Sleep(1000);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    foreach (object obj in this.grid.Children)
-                    {
-                        if (obj is Button)
-                        {
-                            (obj as Button).IsEnabled = true;
-                        }
-                    }
-                    this.listBox_List.Items.Clear();
-
-                    content = string.Empty;
-                    memobirdID = string.Empty;
-                    str = string.Empty;
-                    printcontentid = string.Empty;
-                    itemString = string.Empty;
-                    image = null;
-                }
-            }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ListBox_List.Items.Clear();
+                content = string.Empty;
+                memobirdID = string.Empty;
+                str = string.Empty;
+                printcontentid = string.Empty;
+                itemString = string.Empty;
+                image = null;
+                GC.Collect();
+            }
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void button_Send_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Send_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.comboBox_DeviceList.Items.Count == 0)
+            if (ComboBox_DeviceList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if (this.listBox_List.Items.Count == 0)
+            if (ListBox_List.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
-            Thread _thread = new Thread(new ThreadStart(PrintPaper));
-            _thread.Start();
+            PrintPaper();
         }
 
-        private void button_AddText_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_AddText_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             new Window_AddText().ShowDialog();
 
-            if (AddedContent.text.Length == 0)
+            if (AddedContent.Text.Length == 0)
             {
                 return;
             }
 
-            this.listBox_List.Items.Add("T:" + AddedContent.text);
+            ListBox_List.Items.Add("T:" + AddedContent.Text);
 
-            AddedContent.text = string.Empty;
+            AddedContent.Text = string.Empty;
         }
 
-        private void button_AddImage_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_AddImage_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             string[] fileNames = FileX.GetFileBrowserSelectedPath(true);
             foreach (string fileName in fileNames)
             {
-                this.listBox_List.Items.Add("P:" + fileName);
+                ListBox_List.Items.Add("P:" + fileName);
             }
         }
 
-        private void button_ShiftUp_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_ShiftUp_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.listBox_List.SelectedIndex > 0)
+            if (ListBox_List.SelectedIndex > 0)
             {
-                object up = this.listBox_List.SelectedItem;
-                object down = this.listBox_List.Items[this.listBox_List.SelectedIndex - 1];
-                this.listBox_List.Items[this.listBox_List.SelectedIndex - 1] = up;
-                this.listBox_List.Items[this.listBox_List.SelectedIndex] = down;
-                this.listBox_List.SelectedItem = up;
+                object up = ListBox_List.SelectedItem;
+                object down = ListBox_List.Items[ListBox_List.SelectedIndex - 1];
+                ListBox_List.Items[ListBox_List.SelectedIndex - 1] = up;
+                ListBox_List.Items[ListBox_List.SelectedIndex] = down;
+                ListBox_List.SelectedItem = up;
             }
         }
 
-        private void button_ShiftDown_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_ShiftDown_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.listBox_List.SelectedIndex < this.listBox_List.Items.Count - 1)
+            if (ListBox_List.SelectedIndex < ListBox_List.Items.Count - 1)
             {
-                object down = this.listBox_List.SelectedItem;
-                object up = this.listBox_List.Items[this.listBox_List.SelectedIndex + 1];
-                this.listBox_List.Items[this.listBox_List.SelectedIndex + 1] = down;
-                this.listBox_List.Items[this.listBox_List.SelectedIndex] = up;
-                this.listBox_List.SelectedItem = down;
+                object down = ListBox_List.SelectedItem;
+                object up = ListBox_List.Items[ListBox_List.SelectedIndex + 1];
+                ListBox_List.Items[ListBox_List.SelectedIndex + 1] = down;
+                ListBox_List.Items[ListBox_List.SelectedIndex] = up;
+                ListBox_List.SelectedItem = down;
             }
         }
 
-        private void button_Remove_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Remove_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.listBox_List.Items.Remove(this.listBox_List.SelectedItem);
+            ListBox_List.Items.Remove(ListBox_List.SelectedItem);
         }
 
         #endregion

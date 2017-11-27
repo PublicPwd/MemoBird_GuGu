@@ -23,18 +23,18 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         public void FillContnet()
         {
-            this.comboBox_DeviceList.Items.Clear();
+            ComboBox_DeviceList.Items.Clear();
 
-            if (DeviceList.id.Count == 0)
+            if (DeviceList.Id.Count == 0)
             {
                 return;
             }
 
-            foreach (string name in DeviceList.id.Keys)
+            foreach (string name in DeviceList.Id.Keys)
             {
-                this.comboBox_DeviceList.Items.Add(name);
+                ComboBox_DeviceList.Items.Add(name);
             }
-            this.comboBox_DeviceList.SelectedIndex = 0;
+            ComboBox_DeviceList.SelectedIndex = 0;
         }
 
         #endregion
@@ -46,69 +46,61 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         private void PrintPaper()
         {
-            this.button_Send.Dispatcher.Invoke(new Action(delegate
+            string content;
+            string memobirdID;
+            string str;
+            string printcontentid;
+            try
             {
-                string content;
-                string memobirdID;
-                string str;
-                string printcontentid;
-                this.textBox_Content.IsEnabled = false;
-                this.button_Send.IsEnabled = false;
-                try
+                content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(TextBox_Content.Text));
+                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                str = ggApiHelper.UserBind(memobirdID, "0");
+                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
+                while (true)
                 {
-                    content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(this.textBox_Content.Text));
-                    memobirdID = DeviceList.id[this.comboBox_DeviceList.SelectedValue.ToString()];
-                    str = ggApiHelper.UserBind(memobirdID, "0");
-                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                    printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
-                    while (true)
+                    str = ggApiHelper.GetPrintStatus(printcontentid);
+                    if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
-                        str = ggApiHelper.GetPrintStatus(printcontentid);
-                        if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
-                        {
-                            break;
-                        }
-                        Thread.Sleep(1000);
+                        break;
                     }
+                    Thread.Sleep(1000);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    this.textBox_Content.IsEnabled = true;
-                    this.textBox_Content.Text = string.Empty;
-                    this.button_Send.IsEnabled = true;
-
-                    content = string.Empty;
-                    memobirdID = string.Empty;
-                    str = string.Empty;
-                    printcontentid = string.Empty;
-                }
-            }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                TextBox_Content.Text = string.Empty;
+                content = string.Empty;
+                memobirdID = string.Empty;
+                str = string.Empty;
+                printcontentid = string.Empty;
+                GC.Collect();
+            }
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void button_Send_Click(object sender, RoutedEventArgs e)
+        private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if (this.comboBox_DeviceList.Items.Count == 0)
+            if (ComboBox_DeviceList.Items.Count == 0)
             {
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if (this.textBox_Content.Text.Length == 0)
+            if (TextBox_Content.Text.Length == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
-            Thread _thread = new Thread(new ThreadStart(PrintPaper));
-            _thread.Start();
+            PrintPaper();
         }
-        
+
         #endregion
     }
 }

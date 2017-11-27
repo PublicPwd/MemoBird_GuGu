@@ -20,71 +20,71 @@ namespace MemoBird_GuGuJi.Pages
         /// </summary>
         public void FillContent()
         {
-            if (!DeviceList.deviceListChanged)
+            if (!DeviceList.DeviceListChanged)
             {
                 return;
             }
-            foreach (string name in DeviceList.id.Keys)
+            foreach (string name in DeviceList.Id.Keys)
             {
-                this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = name, col2 = DeviceList.id[name] } });
+                DataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = name, col2 = DeviceList.Id[name] } });
             }
-            DeviceList.deviceListChanged = false;
+            DeviceList.DeviceListChanged = false;
         }
 
         #endregion
 
         #region Event Handlers
 
-        private void button_Add_Click(object sender, RoutedEventArgs e)
+        private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             new Window_DeviceDetails().ShowDialog();
 
-            if(DeviceDetails.deviceName.Length==0)
+            if (DeviceDetails.Name.Length == 0)
             {
                 return;
             }
 
-            this.dataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = DeviceDetails.deviceName, col2 = DeviceDetails.deviceId } });
+            DataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = DeviceDetails.Name, col2 = DeviceDetails.Id } });
 
-            DeviceList.deviceListChanged = true;
+            DeviceList.DeviceListChanged = true;
         }
 
-        private void button_Edit_Click(object sender, RoutedEventArgs e)
+        private void Button_Edit_Click(object sender, RoutedEventArgs e)
         {
-            if (this.dataGrid_DeviceList.Items.Count == 0)
+            if (DataGrid_DeviceList.Items.Count == 0)
             {
                 return;
             }
-            var item = this.dataGrid_DeviceList.SelectedItem;
+            var item = DataGrid_DeviceList.SelectedItem;
             DataRowView dataRowView = item as DataRowView;
-            string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
-            string id = (this.dataGrid_DeviceList.Columns[1].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            string id = (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
 
             new Window_DeviceDetails(name, id).ShowDialog();
 
-            if (DeviceDetails.deviceName.Length == 0)
+            if (DeviceDetails.Name.Length == 0)
             {
                 return;
             }
 
-            (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceName;
-            (this.dataGrid_DeviceList.Columns[1].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.deviceId;
+            (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.Name;
+            (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.Id;
 
-            DeviceList.deviceListChanged = true;
+            DeviceList.DeviceListChanged = true;
         }
 
-        private void button_Remove_Click(object sender, RoutedEventArgs e)
+        private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
-            if (this.dataGrid_DeviceList.Items.Count == 0)
+            if (DataGrid_DeviceList.Items.Count == 0)
             {
                 return;
             }
-            var item = this.dataGrid_DeviceList.SelectedItem;
-            string name = (this.dataGrid_DeviceList.Columns[0].GetCellContent(this.dataGrid_DeviceList.Items[0]) as TextBlock).Text;
-            DeviceList.id.Remove(name);
-            this.dataGrid_DeviceList.Items.Remove(item);
+            var item = DataGrid_DeviceList.SelectedItem;
+            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            DeviceList.Id.Remove(name);
+            DataGrid_DeviceList.Items.Remove(item);
 
-            DeviceList.deviceListChanged = true;
+            DeviceList.DeviceListChanged = true;
         }
 
         #endregion

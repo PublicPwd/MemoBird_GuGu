@@ -5,11 +5,11 @@
     <Grid Background="#FFFFF5F7" MouseDown="Grid_MouseDown">
         <Label Content="{DynamicResource version}" HorizontalAlignment="Left" Margin="33,30,0,0" FontSize="20" VerticalAlignment="Top"/>
         <Label Content="" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" BorderThickness="0,1,0,0" BorderBrush="#FF576069" Foreground="{x:Null}" Width="427"/>
-        <Button x:Name="button_Submit" Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="385,235,0,0" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="button_Submit_Click"/>
+        <Button x:Name="Button_Submit" Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="385,235,0,0" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Submit_Click"/>
         <Label Content="{DynamicResource memobirdid}" HorizontalAlignment="Left" Margin="33,80,0,0" VerticalAlignment="Top"/>
         <Label Content="{DynamicResource thanks}" HorizontalAlignment="Left" Margin="33,110,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_url1" Content="{DynamicResource url1}" HorizontalAlignment="Left" Margin="33,135,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="label_url1_MouseDown"/>
-        <Label x:Name="label_url2" Content="{DynamicResource url2}" HorizontalAlignment="Left" Margin="33,160,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="label_url2_MouseDown"/>
-        <TextBox x:Name="textBox_Log" HorizontalAlignment="Left" Height="145" Margin="240,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" IsEnabled="False" Background="#FFFFF5F7" BorderBrush="#FF576069" VerticalScrollBarVisibility="Auto"/>
+        <Label x:Name="Label_url1" Content="{DynamicResource url1}" HorizontalAlignment="Left" Margin="33,135,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="Label_url1_MouseDown"/>
+        <Label x:Name="Label_url2" Content="{DynamicResource url2}" HorizontalAlignment="Left" Margin="33,160,0,0" VerticalAlignment="Top" FontStyle="Italic" Cursor="Hand" Foreground="Blue" MouseDown="Label_url2_MouseDown"/>
+        <TextBox x:Name="TextBox_Log" HorizontalAlignment="Left" Height="145" Margin="240,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" IsEnabled="False" Background="#FFFFF5F7" BorderBrush="#FF576069" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

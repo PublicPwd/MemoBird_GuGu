@@ -3,7 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace MemoBird_GuGuJi.Utils
 {
@@ -36,32 +36,24 @@ namespace MemoBird_GuGuJi.Utils
         /// </summary>
         public static void SaveDeviceList()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlNode xmlNode = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
-            xmlDocument.AppendChild(xmlNode);
-            xmlNode = xmlDocument.CreateElement("Devices");
-            xmlDocument.AppendChild(xmlNode);
-            XmlElement childElement = null;
-            foreach (String key in DeviceList.id.Keys)
-            {
-                childElement = xmlDocument.CreateElement("Device");
-                childElement.SetAttribute("Name", key);
-                childElement.InnerText = DeviceList.id[key];
-                xmlNode.AppendChild(childElement);
-            }
             try
             {
-                xmlDocument.Save(ProgramInfo.deviceList);
+                XDocument xDocument = new XDocument();
+                XElement xElementParent = new XElement("Devices");
+                xDocument.Add(xElementParent);
+                XElement xElementChild = null;
+                foreach(string key in DeviceList.Id.Keys)
+                {
+                    xElementChild = new XElement("Device");
+                    xElementChild.SetAttributeValue("Name", key);
+                    xElementChild.Value = DeviceList.Id[key];
+                    xElementParent.Add(xElementChild);
+                }
+                xDocument.Save(ProgramInfo.DeviceList);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                xmlDocument = null;
-                xmlNode = null;
-                childElement = null;
             }
         }
 
@@ -70,42 +62,39 @@ namespace MemoBird_GuGuJi.Utils
         /// </summary>
         public static void LoadDeviceList()
         {
-            if (!File.Exists(ProgramInfo.deviceList))
+            if (!File.Exists(ProgramInfo.DeviceList))
             {
-                CreateDirectory(ProgramInfo.file);
+                CreateDirectory(ProgramInfo.File);
                 return;
             }
-            XmlDocument xmlDocument = new XmlDocument();
+
             try
             {
-                xmlDocument.Load(ProgramInfo.deviceList);
+                XDocument xDocument = XDocument.Load(ProgramInfo.DeviceList);
+                var devices = xDocument.Descendants("Device");
+                foreach(var device in devices)
+                {
+                    DeviceList.Id.Add((string)device.Attribute("Name"), device.Value);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            XmlNode xmlNode = xmlDocument.LastChild;
-            XmlElement xmlElement = null;
-            for (int i = 0; i < xmlNode.ChildNodes.Count; i++)
-            {
-                xmlElement = xmlNode.ChildNodes[i] as XmlElement;
-                DeviceList.id.Add(xmlElement.GetAttribute("Name"), xmlElement.InnerText);
-            }
-
-            xmlDocument = null;
-            xmlNode = null;
-            xmlElement = null;
         }
 
         /// <summary>
         /// 弹出文件选择窗口
         /// </summary>
+        /// <param name="multiselect">是否允许多选</param>
         /// <returns>选择的文件列表</returns>
         public static string[] GetFileBrowserSelectedPath(bool multiselect)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = multiselect;
-            openFileDialog.Filter = "JPEG|*.jpg|PNG|*.png|BMP|*.bmp|ALL|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = multiselect,
+                Filter = "JPEG|*.jpg|PNG|*.png|BMP|*.bmp|ALL|*.*"
+            };
             openFileDialog.ShowDialog();
             return openFileDialog.FileNames;
         }
