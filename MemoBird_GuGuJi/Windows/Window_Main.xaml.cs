@@ -104,6 +104,11 @@ namespace MemoBird_GuGuJi
             Close();
         }
 
+        private void Button_Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
+        }
+
         private void Button_Minimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;

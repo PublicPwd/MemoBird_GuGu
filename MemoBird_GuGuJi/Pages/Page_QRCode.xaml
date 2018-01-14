@@ -13,10 +13,10 @@
             <ComboBoxItem Content="{DynamicResource website}" Tag="urlto:"/>
             <ComboBoxItem Content="{DynamicResource email}" Tag="mailto:"/>
         </ComboBox>
-        <TextBox x:Name="TextBox_Content" HorizontalAlignment="Left" Height="25" Margin="130,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="495" FontSize="16" TextChanged="TextBox_Content_TextChanged"/>
-        <Button x:Name="Button_Send" Content="{DynamicResource send}" HorizontalAlignment="Left" Margin="660,50,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click"/>
-        <TextBox x:Name="TextBox_QRCode" HorizontalAlignment="Left" Height="340" Margin="25,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" AcceptsReturn="True" FontSize="16" Background="White" IsEnabled="False"/>
-        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,400,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboBox_DeviceList" HorizontalAlignment="Left" Margin="90,405,0,0" VerticalAlignment="Top" Width="535" Height="25" FontSize="16"/>
+        <TextBox x:Name="TextBox_Content" Height="25" Margin="130,25,175,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" TextChanged="TextBox_Content_TextChanged"/>
+        <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,50,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
+        <TextBox x:Name="TextBox_QRCode" Margin="25,55,175,55" TextWrapping="Wrap" AcceptsReturn="True" FontSize="16" Background="White" IsEnabled="False"/>
+        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBox_DeviceList" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

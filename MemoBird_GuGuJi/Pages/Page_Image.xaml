@@ -6,12 +6,12 @@
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="Grid">
-        <Border Margin="25,25,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="600" Height="370" BorderThickness="1" Background="White" BorderBrush="#FFABADB3">
-            <Image x:Name="Image_Content" HorizontalAlignment="Left" Height="370" VerticalAlignment="Top" Width="600"/>
+        <Border Margin="25,25,175,55" BorderThickness="1" Background="White" BorderBrush="#FFABADB3">
+            <Image x:Name="Image_Content" Margin="0,0,-2,-2"/>
         </Border>
-        <Button x:Name="Button_Send" Content="{DynamicResource send}" HorizontalAlignment="Left" Margin="660,50,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click"/>
-        <Button x:Name="Button_Image" Content="{DynamicResource image}" HorizontalAlignment="Left" Margin="660,100,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Image_Click"/>
-        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,400,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboBox_DeviceList" HorizontalAlignment="Left" Margin="90,405,0,0" VerticalAlignment="Top" Width="535" Height="25" FontSize="16"/>
+        <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,50,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
+        <Button x:Name="Button_Image" Content="{DynamicResource image}" Margin="0,100,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Image_Click" HorizontalAlignment="Right" Width="100"/>
+        <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBox_DeviceList" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

@@ -7,14 +7,14 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <DataGrid x:Name="DataGrid_DeviceList" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Height="400" Width="600" GridLinesVisibility="Horizontal" FontSize="16" Background="White" IsReadOnly="True" >
+        <DataGrid x:Name="DataGrid_DeviceList" Margin="25,25,175,25" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding col1}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource name}" Width="290" CanUserResize="False"/>
-                <DataGridTextColumn Binding="{Binding col2}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource id}" Width="290" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding col1}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource name}" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding col2}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource id}" CanUserResize="False"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Button_Add" Content="{DynamicResource add}" HorizontalAlignment="Left" Margin="660,50,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Add_Click"/>
-        <Button x:Name="Button_Edit" Content="{DynamicResource edit}" HorizontalAlignment="Left" Margin="660,100,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Edit_Click"/>
-        <Button x:Name="Button_Remove" Content="{DynamicResource remove}" HorizontalAlignment="Left" Margin="660,150,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Remove_Click"/>
+        <Button x:Name="Button_Add" Content="{DynamicResource add}" Margin="0,50,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Add_Click" HorizontalAlignment="Right" Width="100"/>
+        <Button x:Name="Button_Edit" Content="{DynamicResource edit}" Margin="0,100,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Edit_Click" HorizontalAlignment="Right" Width="100"/>
+        <Button x:Name="Button_Remove" Content="{DynamicResource remove}" Margin="0,150,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Remove_Click" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Page>

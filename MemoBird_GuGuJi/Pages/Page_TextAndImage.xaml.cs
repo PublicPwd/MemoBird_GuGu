@@ -51,8 +51,6 @@ namespace MemoBird_GuGuJi.Windows
             string str;
             string printcontentid;
             string itemString;
-            char c;
-            System.Drawing.Image image = null;
             try
             {
                 for (int i = 0; i < ListBox_List.Items.Count; i++)
@@ -90,7 +88,6 @@ namespace MemoBird_GuGuJi.Windows
                 str = string.Empty;
                 printcontentid = string.Empty;
                 itemString = string.Empty;
-                image = null;
                 GC.Collect();
             }
         }
