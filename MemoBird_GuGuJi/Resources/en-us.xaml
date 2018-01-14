@@ -32,4 +32,5 @@
     <s:String x:Key="telephone">Phone</s:String>
     <s:String x:Key="website">WebSite</s:String>
     <s:String x:Key="email">E-Mail</s:String>
+    <s:String x:Key="inputtext">Input Text</s:String>
 </ResourceDictionary>

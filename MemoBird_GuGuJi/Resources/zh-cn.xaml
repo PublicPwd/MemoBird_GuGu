@@ -32,4 +32,5 @@
     <s:String x:Key="telephone">电话</s:String>
     <s:String x:Key="website">网址</s:String>
     <s:String x:Key="email">邮件</s:String>
+    <s:String x:Key="inputtext">输入文本</s:String>
 </ResourceDictionary>

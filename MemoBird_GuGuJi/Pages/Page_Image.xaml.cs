@@ -49,18 +49,9 @@ namespace MemoBird_GuGuJi.Pages
             string memobirdID;
             string str;
             string printcontentid;
-            System.Drawing.Image image = null;
             try
             {
-                for (int i = 0; i < ListBox_ImageList.Items.Count; i++)
-                {
-                    if (i != 0)
-                    {
-                        content = content + "|";
-                    }
-                    image = System.Drawing.Image.FromFile(ListBox_ImageList.Items[i].ToString());
-                    content = content + "P:" + OpenLibrary.ggApi.ImageHelper.GetPoitImgBase64(image);
-                }
+                content = content + "P:" + Image_Content.Tag;
                 memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
                 str = ggApiHelper.UserBind(memobirdID, "0");
                 str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
@@ -70,6 +61,7 @@ namespace MemoBird_GuGuJi.Pages
                     str = ggApiHelper.GetPrintStatus(printcontentid);
                     if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
+                        FileX.SaveHistory(memobirdID, content);
                         break;
                     }
                     Thread.Sleep(1000);
@@ -81,13 +73,12 @@ namespace MemoBird_GuGuJi.Pages
             }
             finally
             {
-                ListBox_ImageList.Items.Clear();
+                Image_Content.Source = null;
 
                 content = string.Empty;
                 memobirdID = string.Empty;
                 str = string.Empty;
                 printcontentid = string.Empty;
-                image = null;
                 GC.Collect();
             }
         }
@@ -96,13 +87,17 @@ namespace MemoBird_GuGuJi.Pages
 
         #region Event Handlers
 
-        private void Button_Add_Click(object sender, RoutedEventArgs e)
+        private void Button_Image_Click(object sender, RoutedEventArgs e)
         {
-            string[] fileNames = FileX.GetFileBrowserSelectedPath(true);
-            foreach (string fileName in fileNames)
+            string[] fileNames = FileX.GetFileBrowserSelectedPath(false);
+            if (fileNames.Length == 0)
             {
-                ListBox_ImageList.Items.Add(fileName);
+                return;
             }
+            var image = System.Drawing.Image.FromFile(fileNames[0]);
+            string base64 = ImageHelper.GetPoitImgBase64(image);
+            Image_Content.Tag = base64;
+            Image_Content.Source = FileX.ImageFromBase64String(base64);
         }
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
@@ -112,41 +107,12 @@ namespace MemoBird_GuGuJi.Pages
                 MessageBox.Show(FindResource("pleaseadddevice").ToString());
                 return;
             }
-            if (ListBox_ImageList.Items.Count == 0)
+            if (Image_Content.Tag.ToString().Length == 0)
             {
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
             PrintPaper();
-        }
-
-        private void Button_ShiftUp_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListBox_ImageList.SelectedIndex > 0)
-            {
-                object up = ListBox_ImageList.SelectedItem;
-                object down = ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex - 1];
-                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex - 1] = up;
-                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex] = down;
-                ListBox_ImageList.SelectedItem = up;
-            }
-        }
-
-        private void Button_ShiftDown_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListBox_ImageList.SelectedIndex < ListBox_ImageList.Items.Count - 1)
-            {
-                object down = ListBox_ImageList.SelectedItem;
-                object up = ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex + 1];
-                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex + 1] = down;
-                ListBox_ImageList.Items[ListBox_ImageList.SelectedIndex] = up;
-                ListBox_ImageList.SelectedItem = down;
-            }
-        }
-
-        private void Button_Remove_Click(object sender, RoutedEventArgs e)
-        {
-            ListBox_ImageList.Items.Remove(ListBox_ImageList.SelectedItem);
         }
 
         #endregion

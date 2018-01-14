@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -11,64 +12,47 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
     {
         public static string GetPoitImgBase64(Image img)
         {
-            Image imgTemp = ImageHelper.CovertImg(img);
-            byte[] imglastbyte = ImageHelper.ImageToBytes(imgTemp);
-            int imglastHeight = ImageHelper.bytesToInt(imglastbyte, 22);
-            byte[] byteTemp = ImageHelper.intToBytes(-imglastHeight);
+            Image imgTemp = CovertImg(img);
+            byte[] imglastbyte = ImageToBytes(imgTemp);
+            int imglastHeight = BytesToInt(imglastbyte, 22);
+            byte[] byteTemp = IntToBytes(-imglastHeight);
             imglastbyte[22] = byteTemp[0];
             imglastbyte[23] = byteTemp[1];
             imglastbyte[24] = byteTemp[2];
             imglastbyte[25] = byteTemp[3];
             return Convert.ToBase64String(imglastbyte);
         }
+
         private static Bitmap CovertImg(Image img)
         {
-            Image tempImage = ImageHelper.ZoomPic(img, 384.0);
+            Image tempImage = ZoomPic(img, 384.0);
             Bitmap map = new Bitmap(tempImage);
-            return ImageHelper.toBitmap(ImageHelper.doDither(map), 8);
+            return ToBitmap(DoDither(map), 8);
         }
+
         private static byte[] ImageToBytes(Image image)
         {
             ImageFormat format = image.RawFormat;
             byte[] result;
             using (MemoryStream ms = new MemoryStream())
             {
-                if (format.Equals(ImageFormat.Jpeg))
+                image.Save(ms, ImageFormat.Bmp);
+                List<ImageFormat> list = new List<ImageFormat>
                 {
-                    image.Save(ms, ImageFormat.Jpeg);
-                }
-                else
+                    ImageFormat.Jpeg,
+                    ImageFormat.Png,
+                    ImageFormat.Gif,
+                    ImageFormat.Icon
+                };
+                foreach(ImageFormat imageFormat in list)
                 {
-                    if (format.Equals(ImageFormat.Png))
+                    if(format.Equals(imageFormat))
                     {
-                        image.Save(ms, ImageFormat.Png);
-                    }
-                    else
-                    {
-                        if (format.Equals(ImageFormat.Bmp))
-                        {
-                            image.Save(ms, ImageFormat.Bmp);
-                        }
-                        else
-                        {
-                            if (format.Equals(ImageFormat.Gif))
-                            {
-                                image.Save(ms, ImageFormat.Gif);
-                            }
-                            else
-                            {
-                                if (format.Equals(ImageFormat.Icon))
-                                {
-                                    image.Save(ms, ImageFormat.Icon);
-                                }
-                                else
-                                {
-                                    image.Save(ms, ImageFormat.Bmp);
-                                }
-                            }
-                        }
+                        image.Save(ms, imageFormat);
+                        break;
                     }
                 }
+
                 byte[] buffer = new byte[ms.Length];
                 ms.Seek(0L, SeekOrigin.Begin);
                 ms.Read(buffer, 0, buffer.Length);
@@ -76,36 +60,31 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
             }
             return result;
         }
-        private static int bytesToInt(byte[] src, int offset)
+
+        private static int BytesToInt(byte[] src, int offset)
         {
-            return (int)(src[offset] & 255) | (int)(src[offset + 1] & 255) << 8 | (int)(src[offset + 2] & 255) << 16 | (int)(src[offset + 3] & 255) << 24;
+            return src[offset] & 255 | (src[offset + 1] & 255) << 8 | (src[offset + 2] & 255) << 16 | (src[offset + 3] & 255) << 24;
         }
-        private static byte[] intToBytes(int value)
+
+        private static byte[] IntToBytes(int value)
         {
-            byte[] src = new byte[]
-			{
-				0,
-				0,
-				0,
-				(byte)(value >> 24 & 255)
-			};
+            byte[] src = new byte[] { 0, 0, 0, (byte)(value >> 24 & 255) };
             src[2] = (byte)(value >> 16 & 255);
             src[1] = (byte)(value >> 8 & 255);
             src[0] = (byte)(value & 255);
             return src;
         }
+
         private static Image ZoomPic(Image initImage, double targetWidth)
         {
             Image result;
-            if ((double)initImage.Width <= targetWidth)
+            if (initImage.Width <= targetWidth)
             {
                 result = initImage;
             }
             else
             {
-                double newWidth = (double)initImage.Width;
-                double newHeight = (double)initImage.Height;
-                newHeight = (double)initImage.Height * (targetWidth / (double)initImage.Width);
+                double newHeight = initImage.Height * (targetWidth / initImage.Width);
                 Image toBitmap = new Bitmap(Convert.ToInt32(targetWidth), Convert.ToInt32(newHeight));
                 using (Graphics g = Graphics.FromImage(toBitmap))
                 {
@@ -119,7 +98,8 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
             }
             return result;
         }
-        private static Bitmap toBitmap(Bitmap matrix, int v)
+
+        private static Bitmap ToBitmap(Bitmap matrix, int v)
         {
             int width = matrix.Width;
             int height = matrix.Height;
@@ -143,10 +123,10 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
                         {
                             break;
                         }
-                        int r = (int)matrix.GetPixel(i + w * sDepth, h).R;
-                        int g = (int)matrix.GetPixel(i + w * sDepth, h).G;
-                        int b = (int)matrix.GetPixel(i + w * sDepth, h).B;
-                        sColor += (int)((byte)(((int)((byte)(0.2125 * (double)r + 0.7154 * (double)g + 0.0721 * (double)b)) >= v) ? (128 >> i) : 0));
+                        int r = matrix.GetPixel(i + w * sDepth, h).R;
+                        int g = matrix.GetPixel(i + w * sDepth, h).G;
+                        int b = matrix.GetPixel(i + w * sDepth, h).B;
+                        sColor += (byte)((byte)(0.2125 * r + 0.7154 * g + 0.0721 * b) >= v ? (128 >> i) : 0);
                     }
                     rgbValues[sWidth * h + w] = (byte)sColor;
                 }
@@ -155,7 +135,8 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
             bmp.UnlockBits(bmpData);
             return bmp;
         }
-        private static Bitmap doDither(Bitmap fileIn)
+
+        private static Bitmap DoDither(Bitmap fileIn)
         {
             int width = fileIn.Width;
             int height = fileIn.Height;
@@ -170,10 +151,10 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
                     red[x, y] = (ColorTranslator.ToWin32(fileIn.GetPixel(x, y)) >> 16 & 255);
                     grn[x, y] = (ColorTranslator.ToWin32(fileIn.GetPixel(x, y)) >> 8 & 255);
                     blu[x, y] = (ColorTranslator.ToWin32(fileIn.GetPixel(x, y)) & 255);
-                    average[x, y] = (int)(0.3 * (double)red[x, y] + 0.59 * (double)grn[x, y] + 0.11 * (double)blu[x, y]);
+                    average[x, y] = (int)(0.3 * red[x, y] + 0.59 * grn[x, y] + 0.11 * blu[x, y]);
                 }
             }
-            int[,] pixel_floyd = ImageHelper.dither(average, height, width);
+            int[,] pixel_floyd = Dither(average, height, width);
             Bitmap bitmapAfterDither = new Bitmap(fileIn, width, height);
             for (int y = 0; y < height; y++)
             {
@@ -185,7 +166,8 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
             }
             return bitmapAfterDither;
         }
-        private static int[,] dither(int[,] pixel, int height, int width)
+
+        private static int[,] Dither(int[,] pixel, int height, int width)
         {
             for (int y = 0; y < height; y++)
             {

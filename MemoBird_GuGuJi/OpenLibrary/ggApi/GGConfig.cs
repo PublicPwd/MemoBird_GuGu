@@ -3,7 +3,7 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
 {
     public static class GGConfig
     {
-        public static string ak = FileX.LoadInfo();
-        public static string url = "Http://open.memobird.cn";
+        public static readonly string ak = FileX.LoadInfo();
+        public static readonly string url = "Http://open.memobird.cn";
     }
 }

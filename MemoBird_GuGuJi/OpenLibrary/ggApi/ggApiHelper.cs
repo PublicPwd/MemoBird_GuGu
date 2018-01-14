@@ -8,22 +8,21 @@ namespace MemoBird_GuGuJi.OpenLibrary.ggApi
         {
             Apis apis = new Apis(GGConfig.ak, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             string url = GGConfig.url + "/home/setuserbind";
-            string res = apis.UserBind(url, memobirdId, useridentifying);
-            return res;
+            return apis.UserBind(url, memobirdId, useridentifying);
         }
+
         public static string PrintPaper(string memobirdID, string userID, string printcontent)
         {
             Apis apis = new Apis(GGConfig.ak, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             string url = GGConfig.url + "/home/printpaper";
-            string res = apis.PrintPaper(url, memobirdID, userID, printcontent);
-            return res;
+            return apis.PrintPaper(url, memobirdID, userID, printcontent);
         }
+
         public static string GetPrintStatus(string printcontentID)
         {
             Apis apis = new Apis(GGConfig.ak, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             string url = GGConfig.url + "/home/getprintstatus";
-            string res = apis.GetPrintStatus(url, printcontentID);
-            return res;
+            return apis.GetPrintStatus(url, printcontentID);
         }
     }
 }

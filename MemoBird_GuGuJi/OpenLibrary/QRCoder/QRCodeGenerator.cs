@@ -256,8 +256,7 @@ namespace QRCoder
 
                 var size = qrCode.ModuleMatrix.Count;
 
-                var methods = typeof(MaskPattern).GetMethods();
-
+                var methods = typeof (MaskPattern).GetMethods();
                 foreach (var pattern in methods)
                 {
                     if (pattern.Name.Length == 8 && pattern.Name.Substring(0, 7) == "Pattern")
@@ -302,7 +301,6 @@ namespace QRCoder
                 }
 
                 var patterMethod = typeof(MaskPattern).GetMethods().First(x => x.Name == patternName);
-
 
                 for (var x = 0; x < size; x++)
                 {
@@ -847,7 +845,6 @@ namespace QRCoder
         private bool IsValidISO(string input)
         {
             var bytes = Encoding.GetEncoding("ISO-8859-1").GetBytes(input);
-            //var result = Encoding.GetEncoding("ISO-8859-1").GetString(bytes);
             var result = Encoding.GetEncoding("ISO-8859-1").GetString(bytes, 0, bytes.Length);
             return String.Equals(input, result);
         }
@@ -1019,7 +1016,6 @@ namespace QRCoder
         private void CreateAlphanumEncDict()
         {
             this.alphanumEncDict = new Dictionary<char, int>();
-            //alphanumEncTable.ToList().Select((x, i) => new { Chr = x, Index = i }).ToList().ForEach(x => this.alphanumEncDict.Add(x.Chr, x.Index));
             var resList = alphanumEncTable.ToList().Select((x, i) => new { Chr = x, Index = i }).ToList();
             foreach (var res in resList)
             {
@@ -1324,18 +1320,6 @@ namespace QRCoder
             }
 
             public List<PolynomItem> PolyItems { get; set; }
-
-            public override string ToString()
-            {
-                var sb = new StringBuilder();
-                //this.PolyItems.ForEach(x => sb.Append("a^" + x.Coefficient + "*x^" + x.Exponent + " + "));
-                foreach (var polyItem in this.PolyItems)
-                {
-                    sb.Append("a^" + polyItem.Coefficient + "*x^" + polyItem.Exponent + " + ");
-                }
-
-                return sb.ToString().TrimEnd(new[] { ' ', '+' });
-            }
         }
 
         private class Point

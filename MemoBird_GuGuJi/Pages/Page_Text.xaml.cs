@@ -14,6 +14,7 @@ namespace MemoBird_GuGuJi.Pages
         public Page_Text()
         {
             InitializeComponent();
+            TextBox_Content.Focus();
         }
 
         #region Public Function
@@ -62,6 +63,7 @@ namespace MemoBird_GuGuJi.Pages
                     str = ggApiHelper.GetPrintStatus(printcontentid);
                     if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
+                        FileX.SaveHistory(memobirdID, content);
                         break;
                     }
                     Thread.Sleep(1000);

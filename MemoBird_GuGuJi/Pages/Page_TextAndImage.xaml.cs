@@ -2,7 +2,7 @@
 using MemoBird_GuGuJi.OpenLibrary.ggApi;
 using MemoBird_GuGuJi.Utils;
 using System;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,22 +57,11 @@ namespace MemoBird_GuGuJi.Windows
             {
                 for (int i = 0; i < ListBox_List.Items.Count; i++)
                 {
-                    itemString = ListBox_List.Items[i].ToString();
-                    c = itemString[0];
-                    itemString = itemString.Substring(2, itemString.Length - 2);
                     if (i != 0)
                     {
                         content = content + "|";
                     }
-                    if (c == 'P')
-                    {
-                        image = System.Drawing.Image.FromFile(itemString);
-                        content = content + "P:" + ImageHelper.GetPoitImgBase64(image);
-                    }
-                    else
-                    {
-                        content = content + "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(itemString + "\n"));
-                    }
+                    content = content + (ListBox_List.Items[i] as ListBoxItem).Tag;
                 }
                 memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
                 str = ggApiHelper.UserBind(memobirdID, "0");
@@ -83,6 +72,7 @@ namespace MemoBird_GuGuJi.Windows
                     str = ggApiHelper.GetPrintStatus(printcontentid);
                     if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
+                        FileX.SaveHistory(memobirdID, content);
                         break;
                     }
                     Thread.Sleep(1000);
@@ -109,7 +99,7 @@ namespace MemoBird_GuGuJi.Windows
 
         #region Event Handlers
 
-        private void Button_Send_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
             if (ComboBox_DeviceList.Items.Count == 0)
             {
@@ -124,7 +114,7 @@ namespace MemoBird_GuGuJi.Windows
             PrintPaper();
         }
 
-        private void Button_AddText_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_AddText_Click(object sender, RoutedEventArgs e)
         {
             new Window_AddText().ShowDialog();
 
@@ -133,45 +123,88 @@ namespace MemoBird_GuGuJi.Windows
                 return;
             }
 
-            ListBox_List.Items.Add("T:" + AddedContent.Text);
+            ListBoxItem listBoxItem = new ListBoxItem()
+            {
+                Content = AddedContent.Text,
+                Tag = "T:" + AddedContent.Text
+            };
+            ListBox_List.Items.Add(listBoxItem);
 
             AddedContent.Text = string.Empty;
         }
 
-        private void Button_AddImage_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_AddImage_Click(object sender, RoutedEventArgs e)
         {
-            string[] fileNames = FileX.GetFileBrowserSelectedPath(true);
-            foreach (string fileName in fileNames)
+            string[] fileNames = FileX.GetFileBrowserSelectedPath(false);
+            if (fileNames.Length == 0)
             {
-                ListBox_List.Items.Add("P:" + fileName);
+                return;
+            }
+            var image = System.Drawing.Image.FromFile(fileNames[0]);
+            string base64 = ImageHelper.GetPoitImgBase64(image);
+            Image img = new Image()
+            {
+                Source = FileX.ImageFromBase64String(base64)
+            };
+            ListBoxItem listBoxItem = new ListBoxItem()
+            {
+                Content = img,
+                Tag = "P:" + base64
+            };
+            ListBox_List.Items.Add(listBoxItem);
+        }
+
+        private void Button_ShiftUp_Click(object sender, RoutedEventArgs e)
+        {
+            int index = ListBox_List.SelectedIndex;
+            if (index > 0)
+            {
+                List<object> list = new List<object>();
+                for (int i = 0; i < ListBox_List.Items.Count; i++)
+                {
+                    if (i == index - 1)
+                    {
+                        list.Add(ListBox_List.Items[index]);
+                        list.Add(ListBox_List.Items[index - 1]);
+                        i++;
+                        continue;
+                    }
+                    list.Add(ListBox_List.Items[i]);
+                }
+                ListBox_List.Items.Clear();
+                foreach (object obj in list)
+                {
+                    ListBox_List.Items.Add(obj);
+                }
             }
         }
 
-        private void Button_ShiftUp_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_ShiftDown_Click(object sender, RoutedEventArgs e)
         {
-            if (ListBox_List.SelectedIndex > 0)
+            int index = ListBox_List.SelectedIndex;
+            if (index < ListBox_List.Items.Count - 1)
             {
-                object up = ListBox_List.SelectedItem;
-                object down = ListBox_List.Items[ListBox_List.SelectedIndex - 1];
-                ListBox_List.Items[ListBox_List.SelectedIndex - 1] = up;
-                ListBox_List.Items[ListBox_List.SelectedIndex] = down;
-                ListBox_List.SelectedItem = up;
+                List<object> list = new List<object>();
+                for(int i=0;i<ListBox_List.Items.Count;i++)
+                {
+                    if(i==index)
+                    {
+                        list.Add(ListBox_List.Items[index + 1]);
+                        list.Add(ListBox_List.Items[index]);
+                        i++;
+                        continue;
+                    }
+                    list.Add(ListBox_List.Items[i]);
+                }
+                ListBox_List.Items.Clear();
+                foreach(object obj in list)
+                {
+                    ListBox_List.Items.Add(obj);
+                }
             }
         }
 
-        private void Button_ShiftDown_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (ListBox_List.SelectedIndex < ListBox_List.Items.Count - 1)
-            {
-                object down = ListBox_List.SelectedItem;
-                object up = ListBox_List.Items[ListBox_List.SelectedIndex + 1];
-                ListBox_List.Items[ListBox_List.SelectedIndex + 1] = down;
-                ListBox_List.Items[ListBox_List.SelectedIndex] = up;
-                ListBox_List.SelectedItem = down;
-            }
-        }
-
-        private void Button_Remove_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
             ListBox_List.Items.Remove(ListBox_List.SelectedItem);
         }

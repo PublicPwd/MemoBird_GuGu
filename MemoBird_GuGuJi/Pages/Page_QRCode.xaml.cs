@@ -19,6 +19,7 @@ namespace MemoBird_GuGuJi.Pages
         public Page_QRCode()
         {
             InitializeComponent();
+            TextBox_Content.Focus();
         }
 
         #region Private Function
@@ -43,17 +44,6 @@ namespace MemoBird_GuGuJi.Pages
         }
 
         /// <summary>
-        /// 生成二维码
-        /// </summary>
-        private void GenerateQRCode()
-        {
-            qrCode = QRCoderHelper.Generate(TextBox_Content.Tag + TextBox_Content.Text);
-            IntPtr intPtr = qrCode.GetHbitmap();
-            BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            TextBox_QRCode.Background = new ImageBrush(bitmapSource);
-        }
-
-        /// <summary>
         /// 打印二维码
         /// </summary>
         private void PrintPaper()
@@ -74,6 +64,7 @@ namespace MemoBird_GuGuJi.Pages
                     str = ggApiHelper.GetPrintStatus(printcontentid);
                     if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
                     {
+                        FileX.SaveHistory(memobirdID, content);
                         break;
                     }
                     Thread.Sleep(1000);
@@ -101,7 +92,13 @@ namespace MemoBird_GuGuJi.Pages
 
         private void TextBox_Content_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.GenerateQRCode();
+            using (qrCode = QRCoderHelper.Generate((ComboBox_Type.SelectedItem as ComboBoxItem).Tag + TextBox_Content.Text))
+            {
+                IntPtr intPtr = qrCode.GetHbitmap();
+                BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                ImageBrush imageBrush = new ImageBrush(bitmapSource);
+                TextBox_QRCode.Background = imageBrush;
+            }
         }
 
         private void ComboBox_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)

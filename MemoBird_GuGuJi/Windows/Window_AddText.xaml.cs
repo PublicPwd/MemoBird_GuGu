@@ -9,6 +9,7 @@ namespace MemoBird_GuGuJi.Windows
         public Window_AddText()
         {
             InitializeComponent();
+            TextBox_Content.Focus();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

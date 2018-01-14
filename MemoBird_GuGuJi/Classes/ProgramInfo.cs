@@ -13,5 +13,10 @@ namespace MemoBird_GuGuJi.Classes
         /// 程序配置文件地址
         /// </summary>
         public static readonly string DeviceList = File + @"\DeviceList.xml";
+
+        /// <summary>
+        /// 打印记录
+        /// </summary>
+        public static readonly string History = File + @"\History";
     }
 }
