@@ -1,9 +1,9 @@
-﻿using MemoBird_GuGuJi.Classes;
+﻿using MemoBird_GuGu.Classes;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MemoBird_GuGuJi.Windows
+namespace MemoBird_GuGu.Windows
 {
     public partial class Window_About : Window
     {

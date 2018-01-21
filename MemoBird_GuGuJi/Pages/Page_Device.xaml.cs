@@ -1,10 +1,10 @@
-﻿using MemoBird_GuGuJi.Classes;
-using MemoBird_GuGuJi.Windows;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.Windows;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MemoBird_GuGuJi.Pages
+namespace MemoBird_GuGu.Pages
 {
     public partial class Page_Device : Page
     {
@@ -55,10 +55,9 @@ namespace MemoBird_GuGuJi.Pages
             {
                 return;
             }
-            var item = DataGrid_DeviceList.SelectedItem;
-            DataRowView dataRowView = item as DataRowView;
-            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
-            string id = (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            int index = DataGrid_DeviceList.SelectedIndex;
+            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text;
+            string id = (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text;
 
             new Window_DeviceDetails(name, id).ShowDialog();
 
@@ -67,8 +66,8 @@ namespace MemoBird_GuGuJi.Pages
                 return;
             }
 
-            (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.Name;
-            (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text = DeviceDetails.Id;
+            (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text = DeviceDetails.Name;
+            (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text = DeviceDetails.Id;
 
             DeviceList.DeviceListChanged = true;
         }

@@ -1,7 +1,7 @@
 ﻿using QRCoder;
 using System.Drawing;
 
-namespace MemoBird_GuGuJi.OpenLibrary.QRCoder
+namespace MemoBird_GuGu.OpenLibrary.QRCoder
 {
     class QRCoderHelper
     {

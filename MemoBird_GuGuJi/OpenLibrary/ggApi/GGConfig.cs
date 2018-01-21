@@ -1,5 +1,5 @@
-﻿using MemoBird_GuGuJi.Utils;
-namespace MemoBird_GuGuJi.OpenLibrary.ggApi
+﻿using MemoBird_GuGu.Utils;
+namespace MemoBird_GuGu.OpenLibrary.ggApi
 {
     public static class GGConfig
     {

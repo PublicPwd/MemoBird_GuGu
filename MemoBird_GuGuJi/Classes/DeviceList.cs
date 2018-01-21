@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MemoBird_GuGuJi.Classes
+namespace MemoBird_GuGu.Classes
 {
     class DeviceList
     {

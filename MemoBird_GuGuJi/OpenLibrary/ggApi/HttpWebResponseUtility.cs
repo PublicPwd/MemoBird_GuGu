@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace MemoBird_GuGuJi.OpenLibrary.ggApi
+namespace MemoBird_GuGu.OpenLibrary.ggApi
 {
     public class HttpWebResponseUtility
     {

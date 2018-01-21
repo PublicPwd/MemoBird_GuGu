@@ -1,4 +1,4 @@
-﻿namespace MemoBird_GuGuJi.Classes
+﻿namespace MemoBird_GuGu.Classes
 {
     class DeviceDetails
     {

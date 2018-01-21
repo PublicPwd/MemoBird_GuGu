@@ -1,13 +1,14 @@
-﻿using MemoBird_GuGuJi.Classes;
-using MemoBird_GuGuJi.OpenLibrary.ggApi;
-using MemoBird_GuGuJi.Utils;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.OpenLibrary.ggApi;
+using MemoBird_GuGu.Utils;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MemoBird_GuGuJi.Windows
+namespace MemoBird_GuGu.Windows
 {
     public partial class Page_TextAndImage : Page
     {
@@ -113,21 +114,20 @@ namespace MemoBird_GuGuJi.Windows
 
         private void Button_AddText_Click(object sender, RoutedEventArgs e)
         {
-            new Window_AddText().ShowDialog();
+            Window_AddText window_AddText = new Window_AddText();
+            window_AddText.ShowDialog();
 
-            if (AddedContent.Text.Length == 0)
+            if (window_AddText.Text.Length == 0)
             {
                 return;
             }
 
             ListBoxItem listBoxItem = new ListBoxItem()
             {
-                Content = AddedContent.Text,
-                Tag = "T:" + AddedContent.Text
+                Content = window_AddText.Text,
+                Tag = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(window_AddText.Text))
             };
             ListBox_List.Items.Add(listBoxItem);
-
-            AddedContent.Text = string.Empty;
         }
 
         private void Button_AddImage_Click(object sender, RoutedEventArgs e)

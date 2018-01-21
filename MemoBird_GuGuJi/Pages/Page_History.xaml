@@ -1,0 +1,25 @@
+﻿<Page x:Class="MemoBird_GuGu.Pages.Page_History"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page_History">
+
+    <Grid>
+        <Label Content="{DynamicResource startdate}" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="DatePicker_Start" HorizontalAlignment="Left" Margin="88,25,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="{DynamicResource enddate}" HorizontalAlignment="Left" Margin="352,24,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="DatePicker_End" HorizontalAlignment="Left" Margin="415,25,0,0" VerticalAlignment="Top" Width="210"/>
+        <Button x:Name="Button_Search" Content="{DynamicResource search}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" HorizontalAlignment="Right" Width="100" Click="Button_Search_Click"/>
+        <DataGrid x:Name="DataGrid_List" Margin="25,55,175,20" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" MouseDoubleClick="DataGrid_List_MouseDoubleClick" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding col1}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource id}" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding col2}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource date}" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding col3}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource content}" CanUserResize="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="双击结果&#13;查看详情" Foreground="#000" Margin="0,80,82,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58"/>
+    </Grid>
+</Page>

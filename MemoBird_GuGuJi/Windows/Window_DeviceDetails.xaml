@@ -1,4 +1,4 @@
-﻿<Window x:Class="MemoBird_GuGuJi.Windows.Window_DeviceDetails"
+﻿<Window x:Class="MemoBird_GuGu.Windows.Window_DeviceDetails"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{DynamicResource device}" Height="200" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6" ResizeMode="NoResize" BorderBrush="#FF576069" BorderThickness="1,0,1,1">

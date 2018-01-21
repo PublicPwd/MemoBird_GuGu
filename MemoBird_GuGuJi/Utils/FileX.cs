@@ -1,13 +1,12 @@
-﻿using MemoBird_GuGuJi.Classes;
+﻿using MemoBird_GuGu.Classes;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
-namespace MemoBird_GuGuJi.Utils
+namespace MemoBird_GuGu.Utils
 {
     class FileX
     {
@@ -60,7 +59,7 @@ namespace MemoBird_GuGuJi.Utils
         }
         
         /// <summary>
-        /// 读取系统“我的文档”中程序默认的配置文件,只在程序启动时运行一次
+        /// 读取系统“AppData”中程序默认的配置文件,只在程序启动时运行一次
         /// </summary>
         public static void LoadDeviceList()
         {
@@ -111,7 +110,7 @@ namespace MemoBird_GuGuJi.Utils
             string directory = ProgramInfo.History + "\\" + memobirdID;
             CreateDirectory(directory);
             DateTime dateTime = DateTime.Now;
-            string filePath = directory + dateTime.Year.ToString() + dateTime.Month.ToString() + dateTime.Day.ToString() + ".xml";
+            string filePath = directory + "\\" + dateTime.ToString("yyyyMMdd");
             XDocument xDocument = null;
             if (!File.Exists(filePath))
             {

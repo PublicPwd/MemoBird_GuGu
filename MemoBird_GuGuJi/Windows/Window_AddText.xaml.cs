@@ -1,11 +1,12 @@
-﻿using MemoBird_GuGuJi.Classes;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
-namespace MemoBird_GuGuJi.Windows
+namespace MemoBird_GuGu.Windows
 {
     public partial class Window_AddText : Window
     {
+        public string Text = string.Empty;
+
         public Window_AddText()
         {
             InitializeComponent();
@@ -22,13 +23,12 @@ namespace MemoBird_GuGuJi.Windows
 
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
-            AddedContent.Text = string.Empty;
             Close();
         }
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            AddedContent.Text = TextBox_Content.Text;
+            Text = TextBox_Content.Text;
             Close();
         }
     }

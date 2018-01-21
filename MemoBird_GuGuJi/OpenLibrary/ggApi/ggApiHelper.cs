@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemoBird_GuGuJi.OpenLibrary.ggApi
+namespace MemoBird_GuGu.OpenLibrary.ggApi
 {
     public static class ggApiHelper
     {

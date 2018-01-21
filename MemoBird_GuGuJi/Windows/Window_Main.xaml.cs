@@ -1,6 +1,6 @@
-﻿using MemoBird_GuGuJi.Pages;
-using MemoBird_GuGuJi.Utils;
-using MemoBird_GuGuJi.Windows;
+﻿using MemoBird_GuGu.Pages;
+using MemoBird_GuGu.Utils;
+using MemoBird_GuGu.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace MemoBird_GuGuJi
+namespace MemoBird_GuGu
 {
     public partial class Window_Main : Window
     {
@@ -17,6 +17,7 @@ namespace MemoBird_GuGuJi
         private Page_TextAndImage page_TextAndImage = new Page_TextAndImage();
         private Page_QRCode page_QRCode = new Page_QRCode();
         private Page_Device page_Device = new Page_Device();
+        private Page_History page_History = new Page_History();
 
         public Window_Main()
         {
@@ -43,7 +44,7 @@ namespace MemoBird_GuGuJi
             Label_Image.Foreground = brush;
             Label_TextAndImage.Foreground = brush;
             Label_QRCode.Foreground = brush;
-            Label_Device.Foreground = brush;
+            Label_More.Foreground = brush;
 
             brush = new SolidColorBrush(Color.FromRgb(0xF7, 0x44, 0x61));
             Label label = currentLabel as Label;
@@ -106,7 +107,14 @@ namespace MemoBird_GuGuJi
 
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Maximized;
+            if(WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+            }
         }
 
         private void Button_Minimize_Click(object sender, RoutedEventArgs e)
@@ -122,6 +130,26 @@ namespace MemoBird_GuGuJi
         private void Label_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Label).FontSize = 16;
+        }
+
+        private void Label_More_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Label_Device.Visibility = Visibility.Visible;
+            Label_History.Visibility = Visibility.Visible;
+            (sender as Label).FontSize = 25;
+        }
+
+        private void Label_More_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Label).FontSize = 16;
+            double x = e.GetPosition(null).X;
+            double y = e.GetPosition(null).Y;
+            if (x >= 550 && x <= 650 && y <= 150)
+            {
+                return;
+            }
+            Label_Device.Visibility = Visibility.Hidden;
+            Label_History.Visibility = Visibility.Hidden;
         }
 
         private void Label_About_MouseEnter(object sender, MouseEventArgs e)
@@ -165,8 +193,14 @@ namespace MemoBird_GuGuJi
 
         private void Label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(sender);
+            HightLightTheCurrentTab(Label_More);
             Frame_Pages.Content = page_Device;
+        }
+
+        private void Label_History_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            HightLightTheCurrentTab(Label_More);
+            Frame_Pages.Content = page_History;
         }
 
         private void Label_About_MouseDown(object sender, MouseButtonEventArgs e)

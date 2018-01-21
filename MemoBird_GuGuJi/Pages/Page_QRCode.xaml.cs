@@ -1,7 +1,7 @@
-﻿using MemoBird_GuGuJi.Classes;
-using MemoBird_GuGuJi.OpenLibrary.ggApi;
-using MemoBird_GuGuJi.OpenLibrary.QRCoder;
-using MemoBird_GuGuJi.Utils;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.OpenLibrary.ggApi;
+using MemoBird_GuGu.OpenLibrary.QRCoder;
+using MemoBird_GuGu.Utils;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MemoBird_GuGuJi.Pages
+namespace MemoBird_GuGu.Pages
 {
     public partial class Page_QRCode : Page
     {

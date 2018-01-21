@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MemoBird_GuGuJi
+namespace MemoBird_GuGu
 {
     /// <summary>
     /// App.xaml 的交互逻辑

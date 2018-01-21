@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace MemoBird_GuGuJi.OpenLibrary.ggApi
+namespace MemoBird_GuGu.OpenLibrary.ggApi
 {
     public class Apis
     {

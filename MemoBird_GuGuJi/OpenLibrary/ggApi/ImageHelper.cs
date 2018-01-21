@@ -6,7 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace MemoBird_GuGuJi.OpenLibrary.ggApi
+namespace MemoBird_GuGu.OpenLibrary.ggApi
 {
     class ImageHelper
     {

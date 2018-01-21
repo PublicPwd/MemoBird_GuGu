@@ -7,7 +7,7 @@
     <s:String x:Key="image">图片</s:String>
     <s:String x:Key="jigsaw">拼接</s:String>
     <s:String x:Key="device">设备</s:String>
-    <s:String x:Key="version">咕咕 版本：20.17.11.1</s:String>
+    <s:String x:Key="version">咕咕 版本：20.18.1.1</s:String>
     <s:String x:Key="ok">确认</s:String>
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
@@ -33,4 +33,11 @@
     <s:String x:Key="website">网址</s:String>
     <s:String x:Key="email">邮件</s:String>
     <s:String x:Key="inputtext">输入文本</s:String>
+    <s:String x:Key="startdate">开始日期</s:String>
+    <s:String x:Key="enddate">结束日期</s:String>
+    <s:String x:Key="search">查找</s:String>
+    <s:String x:Key="date">日期</s:String>
+    <s:String x:Key="content">内容</s:String>
+    <s:String x:Key="more">更多</s:String>
+    <s:String x:Key="history">历史</s:String>
 </ResourceDictionary>

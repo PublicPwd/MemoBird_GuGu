@@ -1,13 +1,13 @@
-﻿using MemoBird_GuGuJi.Classes;
-using MemoBird_GuGuJi.OpenLibrary.ggApi;
-using MemoBird_GuGuJi.Utils;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.OpenLibrary.ggApi;
+using MemoBird_GuGu.Utils;
 using System;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MemoBird_GuGuJi.Pages
+namespace MemoBird_GuGu.Pages
 {
     public partial class Page_Text : Page
     {
