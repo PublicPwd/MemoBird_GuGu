@@ -36,8 +36,9 @@ namespace MemoBird_GuGu.Pages
             string[] memobirds = Directory.GetDirectories(ProgramInfo.History);
             foreach (string memobird in memobirds)
             {
+                string[] files = Directory.GetFiles(memobird);
                 var xmlNames = from xmlName in Directory.GetFiles(memobird)
-                               where int.TryParse(xmlName, out n) && int.Parse(xmlName) >= start && int.Parse(xmlName) <= end
+                               where int.TryParse(Path.GetFileName(xmlName), out n) && int.Parse(Path.GetFileName(xmlName)) >= start && int.Parse(Path.GetFileName(xmlName)) <= end
                                select Path.GetFileName(xmlName);
                 foreach (var xmlName in xmlNames)
                 {
