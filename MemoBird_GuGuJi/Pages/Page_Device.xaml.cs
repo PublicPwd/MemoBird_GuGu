@@ -1,4 +1,5 @@
 ﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.Utils;
 using MemoBird_GuGu.Windows;
 using System.Data;
 using System.Windows;
@@ -47,6 +48,7 @@ namespace MemoBird_GuGu.Pages
             DataGrid_DeviceList.Items.Add(new DataGridRow() { Item = new { col1 = DeviceDetails.Name, col2 = DeviceDetails.Id } });
 
             DeviceList.DeviceListChanged = true;
+            FileX.SaveDeviceList();
         }
 
         private void Button_Edit_Click(object sender, RoutedEventArgs e)
@@ -70,6 +72,7 @@ namespace MemoBird_GuGu.Pages
             (DataGrid_DeviceList.Columns[1].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text = DeviceDetails.Id;
 
             DeviceList.DeviceListChanged = true;
+            FileX.SaveDeviceList();
         }
 
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
@@ -78,12 +81,13 @@ namespace MemoBird_GuGu.Pages
             {
                 return;
             }
-            var item = DataGrid_DeviceList.SelectedItem;
-            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[0]) as TextBlock).Text;
+            int index = DataGrid_DeviceList.SelectedIndex;
+            string name = (DataGrid_DeviceList.Columns[0].GetCellContent(DataGrid_DeviceList.Items[index]) as TextBlock).Text;
             DeviceList.Id.Remove(name);
-            DataGrid_DeviceList.Items.Remove(item);
+            DataGrid_DeviceList.Items.RemoveAt(index);
 
             DeviceList.DeviceListChanged = true;
+            FileX.SaveDeviceList();
         }
 
         #endregion

@@ -39,18 +39,17 @@ namespace MemoBird_GuGu.Utils
         {
             try
             {
-                XDocument xDocument = new XDocument();
                 XElement xElementParent = new XElement("Devices");
-                xDocument.Add(xElementParent);
                 XElement xElementChild = null;
                 foreach(string key in DeviceList.Id.Keys)
                 {
-                    xElementChild = new XElement("Device");
-                    xElementChild.SetAttributeValue("Name", key);
-                    xElementChild.Value = DeviceList.Id[key];
+                    xElementChild = new XElement("Device",
+                        new XAttribute("Name",key),
+                        new XAttribute("Value", DeviceList.Id[key])
+                        );
                     xElementParent.Add(xElementChild);
                 }
-                xDocument.Save(ProgramInfo.DeviceList);
+                xElementParent.Save(ProgramInfo.DeviceList);
             }
             catch(Exception ex)
             {
@@ -75,7 +74,7 @@ namespace MemoBird_GuGu.Utils
                 var devices = xDocument.Descendants("Device");
                 foreach(var device in devices)
                 {
-                    DeviceList.Id.Add((string)device.Attribute("Name"), device.Value);
+                    DeviceList.Id.Add((string)device.Attribute("Name"), (string)device.Attribute("Value"));
                 }
             }
             catch(Exception ex)

@@ -92,13 +92,11 @@ namespace MemoBird_GuGu.Pages
 
         private void TextBox_Content_TextChanged(object sender, TextChangedEventArgs e)
         {
-            using (qrCode = QRCoderHelper.Generate((ComboBox_Type.SelectedItem as ComboBoxItem).Tag + TextBox_Content.Text))
-            {
-                IntPtr intPtr = qrCode.GetHbitmap();
-                BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                ImageBrush imageBrush = new ImageBrush(bitmapSource);
-                TextBox_QRCode.Background = imageBrush;
-            }
+            qrCode = QRCoderHelper.Generate((ComboBox_Type.SelectedItem as ComboBoxItem).Tag + TextBox_Content.Text);
+            IntPtr intPtr = qrCode.GetHbitmap();
+            BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            ImageBrush imageBrush = new ImageBrush(bitmapSource);
+            TextBox_QRCode.Background = imageBrush;
         }
 
         private void ComboBox_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)

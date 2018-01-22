@@ -208,11 +208,6 @@ namespace MemoBird_GuGu
             new Window_About().ShowDialog();
         }
 
-        private void Window_Closed(object sender, System.EventArgs e)
-        {
-            FileX.SaveDeviceList();
-        }
-
         #endregion
     }
 }
