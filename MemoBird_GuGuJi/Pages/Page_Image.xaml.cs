@@ -74,7 +74,7 @@ namespace MemoBird_GuGu.Pages
             finally
             {
                 Image_Content.Source = null;
-
+                Image_Content.Tag = string.Empty;
                 content = string.Empty;
                 memobirdID = string.Empty;
                 str = string.Empty;
