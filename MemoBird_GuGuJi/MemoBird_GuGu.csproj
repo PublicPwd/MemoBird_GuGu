@@ -126,6 +126,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\AboutInfo.cs" />
+    <Compile Include="Classes\History.cs" />
     <Compile Include="OpenLibrary\ggApi\GGConfig.cs" />
     <Compile Include="Classes\DeviceDetails.cs" />
     <Compile Include="Classes\DeviceList.cs" />

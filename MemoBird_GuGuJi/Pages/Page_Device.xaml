@@ -7,10 +7,10 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <DataGrid x:Name="DataGrid_DeviceList" Margin="25,25,175,25" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" >
+        <DataGrid x:Name="DataGrid_DeviceList" AutoGenerateColumns="False" Margin="25,25,175,25" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding col1}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource name}" CanUserResize="False"/>
-                <DataGridTextColumn Binding="{Binding col2}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource id}" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="{DynamicResource name}" CanUserResize="False"/>
+                <DataGridTextColumn Binding="{Binding Id}" Header="{DynamicResource id}" CanUserResize="False"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="Button_Add" Content="{DynamicResource add}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Add_Click" HorizontalAlignment="Right" Width="100"/>

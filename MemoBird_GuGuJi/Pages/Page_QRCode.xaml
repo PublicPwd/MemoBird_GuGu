@@ -17,6 +17,6 @@
         <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
         <TextBox x:Name="TextBox_QRCode" Margin="25,55,175,55" TextWrapping="Wrap" AcceptsReturn="True" FontSize="16" Background="White" IsEnabled="False"/>
         <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="ComboBox_DeviceList" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBox_DeviceList" SelectedIndex="0" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

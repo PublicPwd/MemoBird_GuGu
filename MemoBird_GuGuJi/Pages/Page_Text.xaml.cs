@@ -15,30 +15,8 @@ namespace MemoBird_GuGu.Pages
         {
             InitializeComponent();
             TextBox_Content.Focus();
+            ComboBox_DeviceList.ItemsSource = DeviceList.Details;
         }
-
-        #region Public Function
-
-        /// <summary>
-        /// 往 ComboBox 中填充设备列表
-        /// </summary>
-        public void FillContnet()
-        {
-            ComboBox_DeviceList.Items.Clear();
-
-            if (DeviceList.Id.Count == 0)
-            {
-                return;
-            }
-
-            foreach (string name in DeviceList.Id.Keys)
-            {
-                ComboBox_DeviceList.Items.Add(name);
-            }
-            ComboBox_DeviceList.SelectedIndex = 0;
-        }
-
-        #endregion
 
         #region Private Function
 
@@ -54,7 +32,7 @@ namespace MemoBird_GuGu.Pages
             try
             {
                 content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(TextBox_Content.Text));
-                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
                 str = ggApiHelper.UserBind(memobirdID, "0");
                 str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
                 printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");

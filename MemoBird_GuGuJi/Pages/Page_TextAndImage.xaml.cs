@@ -15,30 +15,8 @@ namespace MemoBird_GuGu.Windows
         public Page_TextAndImage()
         {
             InitializeComponent();
+            ComboBox_DeviceList.ItemsSource = DeviceList.Details;
         }
-
-        #region Public Function
-
-        /// <summary>
-        /// 往 DataGrid 中填充设备信息
-        /// </summary>
-        public void FillContent()
-        {
-            ComboBox_DeviceList.Items.Clear();
-
-            if (DeviceList.Id.Count == 0)
-            {
-                return;
-            }
-
-            foreach (string name in DeviceList.Id.Keys)
-            {
-                ComboBox_DeviceList.Items.Add(name);
-            }
-            ComboBox_DeviceList.SelectedIndex = 0;
-        }
-
-        #endregion
 
         #region Private Function
 
@@ -62,7 +40,7 @@ namespace MemoBird_GuGu.Windows
                     }
                     content = content + (ListBox_List.Items[i] as ListBoxItem).Tag;
                 }
-                memobirdID = DeviceList.Id[ComboBox_DeviceList.SelectedValue.ToString()];
+                memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
                 str = ggApiHelper.UserBind(memobirdID, "0");
                 str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
                 printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
@@ -182,9 +160,9 @@ namespace MemoBird_GuGu.Windows
             if (index < ListBox_List.Items.Count - 1)
             {
                 List<object> list = new List<object>();
-                for(int i=0;i<ListBox_List.Items.Count;i++)
+                for (int i = 0; i < ListBox_List.Items.Count; i++)
                 {
-                    if(i==index)
+                    if (i == index)
                     {
                         list.Add(ListBox_List.Items[index + 1]);
                         list.Add(ListBox_List.Items[index]);
@@ -194,7 +172,7 @@ namespace MemoBird_GuGu.Windows
                     list.Add(ListBox_List.Items[i]);
                 }
                 ListBox_List.Items.Clear();
-                foreach(object obj in list)
+                foreach (object obj in list)
                 {
                     ListBox_List.Items.Add(obj);
                 }

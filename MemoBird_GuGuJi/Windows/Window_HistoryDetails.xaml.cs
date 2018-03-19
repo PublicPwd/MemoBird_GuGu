@@ -22,7 +22,7 @@ namespace MemoBird_GuGu.Windows
         {
             string[] contents = content.Split('|');
             ListBoxItem listBoxItem = null;
-            foreach(string c in contents)
+            foreach (string c in contents)
             {
                 string type = c.Substring(0, 2);
                 if (type == "T:")

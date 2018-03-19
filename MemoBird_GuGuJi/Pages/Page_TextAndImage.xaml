@@ -15,6 +15,6 @@
         <Button x:Name="Button_ShiftDown" Content="{DynamicResource shiftdown}" Margin="0,225,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_ShiftDown_Click" HorizontalAlignment="Right" Width="100"/>
         <Button x:Name="Button_Remove" Content="{DynamicResource remove}" Margin="0,275,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Remove_Click" HorizontalAlignment="Right" Width="100"/>
         <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="ComboBox_DeviceList" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBox_DeviceList" SelectedIndex="0" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

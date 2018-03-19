@@ -1,5 +1,5 @@
-﻿using MemoBird_GuGu.Pages;
-using MemoBird_GuGu.Utils;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.Pages;
 using MemoBird_GuGu.Windows;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +12,11 @@ namespace MemoBird_GuGu
 {
     public partial class Window_Main : Window
     {
-        private Page_Text page_Text = new Page_Text();
-        private Page_Image page_Image = new Page_Image();
-        private Page_TextAndImage page_TextAndImage = new Page_TextAndImage();
-        private Page_QRCode page_QRCode = new Page_QRCode();
-        private Page_Device page_Device = new Page_Device();
-        private Page_History page_History = new Page_History();
-
         public Window_Main()
         {
             InitializeComponent();
-            Frame_Pages.Content = page_Text;
-            FileX.LoadDeviceList();
-            page_Device.FillContent();
-            page_Text.FillContnet();
-            page_Image.FillContnet();
-            page_QRCode.FillContnet();
-            page_TextAndImage.FillContent();
+            DeviceList.Load();
+            Frame_Pages.Content = new Page_Text();
         }
 
         #region Private Function
@@ -51,11 +39,6 @@ namespace MemoBird_GuGu
             label.Foreground = brush;
 
             Grid_Nav.Margin = new Thickness(label.Margin.Left, 45, 0, 0);
-
-            page_Text.FillContnet();
-            page_Image.FillContnet();
-            page_TextAndImage.FillContent();
-            page_QRCode.FillContnet();
 
             brush = null;
         }
@@ -107,7 +90,7 @@ namespace MemoBird_GuGu
 
         private void Button_Maximize_Click(object sender, RoutedEventArgs e)
         {
-            if(WindowState == WindowState.Maximized)
+            if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
             }
@@ -170,37 +153,37 @@ namespace MemoBird_GuGu
         private void Label_Text_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = page_Text;
+            Frame_Pages.Content = new Page_Text();
         }
 
         private void Label_Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = page_Image;
+            Frame_Pages.Content = new Page_Image();
         }
 
         private void Label_TextAndImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = page_TextAndImage;
+            Frame_Pages.Content = new Page_TextAndImage();
         }
 
         private void Label_QRCode_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = page_QRCode;
+            Frame_Pages.Content = new Page_QRCode();
         }
 
         private void Label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(Label_More);
-            Frame_Pages.Content = page_Device;
+            Frame_Pages.Content = new Page_Device();
         }
 
         private void Label_History_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HightLightTheCurrentTab(Label_More);
-            Frame_Pages.Content = page_History;
+            Frame_Pages.Content = new Page_History();
         }
 
         private void Label_About_MouseDown(object sender, MouseButtonEventArgs e)

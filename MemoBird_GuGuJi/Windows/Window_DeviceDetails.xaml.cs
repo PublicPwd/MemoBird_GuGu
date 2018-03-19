@@ -1,4 +1,5 @@
 ﻿using MemoBird_GuGu.Classes;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -6,20 +7,20 @@ namespace MemoBird_GuGu.Windows
 {
     public partial class Window_DeviceDetails : Window
     {
-        string oldName;
+        private DeviceDetails deviceDetails = null;
 
         public Window_DeviceDetails()
         {
             InitializeComponent();
-            oldName = string.Empty;
+            TextBox_Name.Focus();
         }
 
-        public Window_DeviceDetails(string name, string id)
+        public Window_DeviceDetails(DeviceDetails deviceDetails)
         {
             InitializeComponent();
-            oldName = name;
-            TextBox_Name.Text = name;
-            TextBox_Id.Text = id;
+            this.deviceDetails = deviceDetails;
+            TextBox_Name.Text = deviceDetails.Name;
+            TextBox_Id.Text = deviceDetails.Id;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -32,8 +33,6 @@ namespace MemoBird_GuGu.Windows
 
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
-            oldName = string.Empty;
-            DeviceDetails.SetDeviceDetails(string.Empty, string.Empty);
             Close();
         }
 
@@ -49,17 +48,23 @@ namespace MemoBird_GuGu.Windows
                 MessageBox.Show(FindResource("pleaseinputdeviceid").ToString());
                 return;
             }
-            if (oldName.Length > 0)
+            if (deviceDetails == null)
             {
-                DeviceList.Id.Remove(oldName);
+                var devices = from d in DeviceList.Details
+                              where d.Name == TextBox_Name.Text
+                              select d;
+                if (devices.Count() > 0)
+                {
+                    MessageBox.Show(FindResource("thisnamehasexist").ToString());
+                    return;
+                }
             }
-            if(DeviceList.Id.ContainsKey(TextBox_Name.Text))
+            else
             {
-                MessageBox.Show(FindResource("thisnamehasexist").ToString());
-                return;
+                DeviceList.Details.Remove(deviceDetails);
             }
-            DeviceList.Id.Add(TextBox_Name.Text, TextBox_Id.Text);
-            DeviceDetails.SetDeviceDetails(TextBox_Name.Text, TextBox_Id.Text);
+            DeviceList.Details.Add(new DeviceDetails(TextBox_Name.Text, TextBox_Id.Text));
+            DeviceList.Save();
             Close();
         }
     }

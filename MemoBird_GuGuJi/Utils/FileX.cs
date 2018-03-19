@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
@@ -30,57 +29,6 @@ namespace MemoBird_GuGu.Utils
                 catch { }
             }
             return bRe;
-        }
-
-        /// <summary>
-        /// 保存设备列表至系统“我的文档”中程序默认的配置文件，只在程序关闭时运行一次
-        /// </summary>
-        public static void SaveDeviceList()
-        {
-            try
-            {
-                XElement xElementParent = new XElement("Devices");
-                XElement xElementChild = null;
-                foreach(string key in DeviceList.Id.Keys)
-                {
-                    xElementChild = new XElement("Device",
-                        new XAttribute("Name",key),
-                        new XAttribute("Value", DeviceList.Id[key])
-                        );
-                    xElementParent.Add(xElementChild);
-                }
-                xElementParent.Save(ProgramInfo.DeviceList);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        
-        /// <summary>
-        /// 读取系统“AppData”中程序默认的配置文件,只在程序启动时运行一次
-        /// </summary>
-        public static void LoadDeviceList()
-        {
-            if (!File.Exists(ProgramInfo.DeviceList))
-            {
-                CreateDirectory(ProgramInfo.File);
-                return;
-            }
-
-            try
-            {
-                XDocument xDocument = XDocument.Load(ProgramInfo.DeviceList);
-                var devices = xDocument.Descendants("Device");
-                foreach(var device in devices)
-                {
-                    DeviceList.Id.Add((string)device.Attribute("Name"), (string)device.Attribute("Value"));
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         /// <summary>

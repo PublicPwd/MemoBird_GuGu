@@ -1,20 +1,67 @@
-﻿using System.Collections.Generic;
+﻿using MemoBird_GuGu.Utils;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace MemoBird_GuGu.Classes
 {
     class DeviceList
     {
-        private static Dictionary<string, string> id = new Dictionary<string, string>();
-        private static bool deviceListChanged = true;
+        /// <summary>
+        /// 设备列表
+        /// </summary>
+        public static ObservableCollection<DeviceDetails> Details = new ObservableCollection<DeviceDetails>();
 
         /// <summary>
-        /// 设备 ID 及对应的名称
+        /// 读取系统“AppData”中程序默认的配置文件,只在程序启动时运行一次
         /// </summary>
-        public static Dictionary<string, string> Id { get => id; set => id = value; }
+        public static void Load()
+        {
+            if (!File.Exists(ProgramInfo.DeviceList))
+            {
+                FileX.CreateDirectory(ProgramInfo.File);
+                return;
+            }
+
+            try
+            {
+                XDocument xDocument = XDocument.Load(ProgramInfo.DeviceList);
+                xDocument.Descendants("Device").ToList().ForEach(device =>
+                {
+                    Details.Add(new DeviceDetails((string)device.Attribute("Name"), (string)device.Attribute("Value")));
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         /// <summary>
-        /// 标记设备列表中的内容是否发生改变
+        /// 保存设备列表至系统“我的文档”中程序默认的配置文件
         /// </summary>
-        public static bool DeviceListChanged { get => deviceListChanged; set => deviceListChanged = value; }
+        public static void Save()
+        {
+            try
+            {
+                XElement xElementParent = new XElement("Devices");
+                Details.ToList().ForEach(device =>
+                {
+                    XElement xElementChild = new XElement("Device",
+                        new XAttribute("Name", device.Name),
+                        new XAttribute("Value", device.Id)
+                        );
+                    xElementParent.Add(xElementChild);
+                });
+                xElementParent.Save(ProgramInfo.DeviceList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

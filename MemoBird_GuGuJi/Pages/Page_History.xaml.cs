@@ -1,6 +1,7 @@
-﻿using MemoBird_GuGu.Windows;
-using MemoBird_GuGu.Classes;
+﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.Windows;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -11,34 +12,36 @@ namespace MemoBird_GuGu.Pages
 {
     public partial class Page_History : Page
     {
+        ObservableCollection<History> histories = new ObservableCollection<History>();
+
         public Page_History()
         {
             InitializeComponent();
             DatePicker_Start.Text = DateTime.Now.ToString();
             DatePicker_End.Text = DateTime.Now.ToString();
+            DataGrid_List.ItemsSource = histories;
         }
 
         /// <summary>
-        /// 读取该时间段内的 XML 历史记录文件，并将里面的信息显示到 DataGridView 中
+        /// 读取该时间段内的 XML 历史记录文件，并将里面的信息显示到 DataGrid 中
         /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
+        /// <param name="startDate">开始日期</param>
+        /// <param name="endDate">结束日期</param>
         private void FetchXmlList(string startDate, string endDate)
         {
             if (!Directory.Exists(ProgramInfo.History))
             {
                 return;
             }
-            DataGrid_List.Items.Clear();
+            histories.Clear();
             int start = int.Parse(startDate);
             int end = int.Parse(endDate);
-            int n = 0;
-            string[] memobirds = Directory.GetDirectories(ProgramInfo.History);
-            foreach (string memobird in memobirds)
+            int tryParseOut = 0;
+            foreach (string memobird in Directory.GetDirectories(ProgramInfo.History))
             {
                 string[] files = Directory.GetFiles(memobird);
                 var xmlNames = from xmlName in Directory.GetFiles(memobird)
-                               where int.TryParse(Path.GetFileName(xmlName), out n) && int.Parse(Path.GetFileName(xmlName)) >= start && int.Parse(Path.GetFileName(xmlName)) <= end
+                               where int.TryParse(Path.GetFileName(xmlName), out tryParseOut) && int.Parse(Path.GetFileName(xmlName)) >= start && int.Parse(Path.GetFileName(xmlName)) <= end
                                select Path.GetFileName(xmlName);
                 foreach (var xmlName in xmlNames)
                 {
@@ -49,7 +52,7 @@ namespace MemoBird_GuGu.Pages
                     {
                         string date = (string)xElement.Attribute("Date");
                         string value = (string)xElement.Attribute("Value");
-                        DataGrid_List.Items.Add(new DataGridRow() { Item = new { col1 = memobirdId, col2 = date, col3 = value } });
+                        histories.Add(new History(memobirdId, date, value));
                     }
                 }
             }
@@ -70,17 +73,12 @@ namespace MemoBird_GuGu.Pages
 
         private void DataGrid_List_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (DataGrid_List.Items.Count == 0)
+            var item = DataGrid_List.SelectedItem as History;
+            if (item == null)
             {
                 return;
             }
-            if (DataGrid_List.SelectedItem == null)
-            {
-                return;
-            }
-            int index = DataGrid_List.SelectedIndex;
-            string content = (DataGrid_List.Columns[2].GetCellContent(DataGrid_List.Items[index]) as TextBlock).Text;
-            new Window_HistoryDetails(content).Show();
+            new Window_HistoryDetails(item.Content).Show();
         }
     }
 }
