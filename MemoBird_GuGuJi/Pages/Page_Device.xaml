@@ -7,7 +7,7 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <DataGrid x:Name="DataGrid_DeviceList" AutoGenerateColumns="False" Margin="25,25,175,25" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" >
+        <DataGrid x:Name="DataGrid_DeviceList" AutoGenerateColumns="False" Margin="25,25,175,25" HeadersVisibility="Column" GridLinesVisibility="Horizontal" FontSize="16" Background="White" ColumnWidth="*" IsReadOnly="True" MouseDoubleClick="DataGrid_DeviceList_MouseDoubleClick" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="{DynamicResource name}" CanUserResize="False"/>
                 <DataGridTextColumn Binding="{Binding Id}" Header="{DynamicResource id}" CanUserResize="False"/>

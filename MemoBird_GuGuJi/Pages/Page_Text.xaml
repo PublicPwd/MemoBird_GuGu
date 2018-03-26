@@ -10,6 +10,17 @@
         <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
         <ComboBox x:Name="ComboBox_DeviceList" SelectedIndex="0" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
         <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
-        <TextBox x:Name="TextBox_Content" Margin="25,25,175,55" TextWrapping="Wrap" AcceptsReturn="True" FontSize="16" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+        <RichTextBox x:Name="RichTextBox_Content" Margin="25,25,175,55" FontSize="15" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <FlowDocument Focusable="True" LineHeight="1"></FlowDocument>
+        </RichTextBox>
+        <Label x:Name="Label_FontFamily" Visibility="Hidden" Content="{DynamicResource fontfamily}" Margin="0,131,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100"/>
+        <ComboBox x:Name="ComboBox_FontFamily" Visibility="Hidden" Margin="0,156,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" SelectionChanged="ComboBox_FontFamily_SelectionChanged"/>
+        <Label x:Name="Label_FontSize" Visibility="Hidden" Content="{DynamicResource fontsize}" Margin="0,187,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100"/>
+        <ComboBox x:Name="ComboBox_FontSize" Visibility="Hidden" Margin="0,212,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" SelectionChanged="ComboBox_FontSize_SelectionChanged"/>
+        <Label Content="{DynamicResource editmode}" Margin="0,73,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100"/>
+        <ComboBox x:Name="ComboBox_EditMode" Margin="0,98,40,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="100" SelectionChanged="ComboBox_EditMode_SelectionChanged">
+            <ComboBoxItem Content="{DynamicResource normal}"></ComboBoxItem>
+            <ComboBoxItem Content="{DynamicResource advanced}"></ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Page>

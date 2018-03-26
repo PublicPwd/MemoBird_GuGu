@@ -69,6 +69,30 @@ namespace MemoBird_GuGu.OpenLibrary.ggApi
         }
 
         /// <summary>
+        /// Html 打印
+        /// </summary>
+        /// <param name="url">请求地址</param>
+        /// <param name="memobirdID">咕咕机设备ID</param>
+        /// <param name="userID">注册用户ID</param>
+        /// <param name="printcontent">打印内容</param>
+        /// <returns></returns>
+        public string PrintHtml(string url, string memobirdID, string userID, string printcontent)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                { "ak", ak },
+                { "timestamp", timestamp },
+                { "memobirdID", memobirdID },
+                { "userID", userID },
+                { "printHtml", printcontent }
+            };
+            var res = HttpWebResponseUtility.CreatePostHttpResponse(url, parameters, null, null, Encoding.UTF8, null);
+            var resstr = res.GetResponseStream();
+            StreamReader sr = new StreamReader(resstr);
+            return sr.ReadToEnd();
+        }
+
+        /// <summary>
         /// 获取纸条打印状态
         /// </summary>
         /// <param name="url">请求地址</param>

@@ -18,6 +18,13 @@ namespace MemoBird_GuGu.OpenLibrary.ggApi
             return apis.PrintPaper(url, memobirdID, userID, printcontent);
         }
 
+        public static string PrintHtml(string memobirdID, string userID, string printcontent)
+        {
+            Apis apis = new Apis(GGConfig.ak, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            string url = GGConfig.url + "/home/printpaperFromHtml";
+            return apis.PrintHtml(url, memobirdID, userID, printcontent);
+        }
+
         public static string GetPrintStatus(string printcontentID)
         {
             Apis apis = new Apis(GGConfig.ak, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));

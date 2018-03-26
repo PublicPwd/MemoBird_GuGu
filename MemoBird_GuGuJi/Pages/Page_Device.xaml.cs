@@ -45,6 +45,11 @@ namespace MemoBird_GuGu.Pages
             DeviceList.Save();
         }
 
+        private void DataGrid_DeviceList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Button_Edit_Click(null, null);
+        }
+
         #endregion
     }
 }

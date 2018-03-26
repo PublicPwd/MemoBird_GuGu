@@ -80,5 +80,10 @@ namespace MemoBird_GuGu.Pages
             }
             new Window_HistoryDetails(item.Content).Show();
         }
+
+        private void Button_Details_Click(object sender, RoutedEventArgs e)
+        {
+            DataGrid_List_MouseDoubleClick(null, null);
+        }
     }
 }

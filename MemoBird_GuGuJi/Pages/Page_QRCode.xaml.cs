@@ -40,16 +40,13 @@ namespace MemoBird_GuGu.Pages
                 memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
                 str = ggApiHelper.UserBind(memobirdID, "0");
                 str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                printcontentid = Parsing.GetUserIDFromJsonString(str, "printcontentid");
-                while (true)
+                if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code") == "1")
                 {
-                    str = ggApiHelper.GetPrintStatus(printcontentid);
-                    if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code").Equals("1"))
-                    {
-                        FileX.SaveHistory(memobirdID, content);
-                        break;
-                    }
-                    Thread.Sleep(1000);
+                    FileX.SaveHistory(memobirdID, content);
+                }
+                else
+                {
+                    MessageBox.Show(FindResource("printfail").ToString());
                 }
             }
             catch (Exception ex)

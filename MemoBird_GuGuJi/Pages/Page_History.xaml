@@ -9,7 +9,7 @@
 
     <Grid>
         <Label Content="{DynamicResource startdate}" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="DatePicker_Start" HorizontalAlignment="Left" Margin="88,25,0,0" VerticalAlignment="Top" Width="210"/>
+        <DatePicker x:Name="DatePicker_Start" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="210"/>
         <Label Content="{DynamicResource enddate}" HorizontalAlignment="Left" Margin="352,24,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="DatePicker_End" HorizontalAlignment="Left" Margin="415,25,0,0" VerticalAlignment="Top" Width="210"/>
         <Button x:Name="Button_Search" Content="{DynamicResource search}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" HorizontalAlignment="Right" Width="100" Click="Button_Search_Click"/>
@@ -20,6 +20,6 @@
                 <DataGridTextColumn Binding="{Binding Content}" ClipboardContentBinding="{x:Null}" Header="{DynamicResource content}" CanUserResize="False"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="双击结果&#13;查看详情" Foreground="#000" Margin="0,80,82,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58"/>
+        <Button x:Name="Button_Details" Content="{DynamicResource details}" Margin="0,75,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Details_Click" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Page>
