@@ -91,12 +91,14 @@ namespace MemoBird_GuGu.Utils
             return bitmapImage;
         }
 
-        public static string LoadInfo()
+        public static string LoadConfig(string filePath)
         {
-            StreamReader sr = new StreamReader("text.txt");
-            string text = sr.ReadLine();
-            sr.Close();
-            return text;
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                string text = sr.ReadLine();
+                sr.Close();
+                return text;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
     <s:String x:Key="image">图片</s:String>
     <s:String x:Key="jigsaw">拼接</s:String>
     <s:String x:Key="device">设备</s:String>
-    <s:String x:Key="version">咕咕 版本：20.18.3.1</s:String>
+    <s:String x:Key="version">咕咕 版本：</s:String>
     <s:String x:Key="ok">确认</s:String>
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
@@ -47,4 +47,11 @@
     <s:String x:Key="normal">普通</s:String>
     <s:String x:Key="printfail">打印失败</s:String>
     <s:String x:Key="details">详情</s:String>
+    <s:String x:Key="wifi">无线局域网</s:String>
+    <s:String x:Key="ssid">无线账号</s:String>
+    <s:String x:Key="password">密码</s:String>
+    <s:String x:Key="passwordtype">密码类型</s:String>
+    <s:String x:Key="ishiddennetwork">是否隐藏网络</s:String>
+    <s:String x:Key="networkwarning">扫描者会知道你的密码，慎用！</s:String>
+    <s:String x:Key="printing">正在打印！</s:String>
 </ResourceDictionary>

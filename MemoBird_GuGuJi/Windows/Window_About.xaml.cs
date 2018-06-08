@@ -1,5 +1,6 @@
 ﻿using MemoBird_GuGu.Classes;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,6 +11,7 @@ namespace MemoBird_GuGu.Windows
         public Window_About()
         {
             InitializeComponent();
+            Label_Title.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ShowLog();
         }
 

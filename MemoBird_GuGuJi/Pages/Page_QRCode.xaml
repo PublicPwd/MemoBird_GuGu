@@ -7,16 +7,31 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <ComboBox x:Name="ComboBox_Type" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Width="100" Height="25" FontSize="16" SelectedIndex="0" SelectionChanged="ComboBox_Type_SelectionChanged">
+        <ComboBox x:Name="ComboBox_Type" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Width="111" Height="25" FontSize="16" SelectedIndex="0" SelectionChanged="ComboBox_Type_SelectionChanged">
             <ComboBoxItem Content="{DynamicResource text}" Tag=""/>
             <ComboBoxItem Content="{DynamicResource telephone}" Tag="tel:"/>
             <ComboBoxItem Content="{DynamicResource website}" Tag="urlto:"/>
             <ComboBoxItem Content="{DynamicResource email}" Tag="mailto:"/>
+            <ComboBoxItem Content="{DynamicResource wifi}" Tag="wifi:s:@name;p:@password;t:@mode;H:;"/>
         </ComboBox>
-        <TextBox x:Name="TextBox_Content" Height="25" Margin="130,25,175,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" TextChanged="TextBox_Content_TextChanged"/>
+        <TextBox x:Name="TextBox_Content" Height="25" Margin="141,25,175,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" TextChanged="TextBox_Content_TextChanged"/>
         <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
         <TextBox x:Name="TextBox_QRCode" Margin="25,55,175,55" TextWrapping="Wrap" AcceptsReturn="True" FontSize="16" Background="White" IsEnabled="False"/>
         <Label Content="{DynamicResource device}" FontSize="16" HorizontalAlignment="Left" Margin="25,0,0,20" Height="30" VerticalAlignment="Bottom"/>
         <ComboBox x:Name="ComboBox_DeviceList" SelectedIndex="0" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="90,0,175,20" FontSize="16" Height="25" VerticalAlignment="Bottom"/>
+        <Grid x:Name="Grid_Netword" Visibility="Hidden">
+            <Label x:Name="Label_SSIDName" Content="{DynamicResource ssid}" HorizontalAlignment="Left" Margin="27,55,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBox_SSIDName" Height="23" Margin="141,59,175,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="SSIDNameAndPassword_TextChanged"/>
+            <Label x:Name="Label_Password" Content="{DynamicResource password}" HorizontalAlignment="Left" Margin="27,85,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TextBox_Password" Height="23" Margin="141,87,175,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="SSIDNameAndPassword_TextChanged"/>
+            <Label x:Name="Label_PasswordType" Content="{DynamicResource passwordtype}" HorizontalAlignment="Left" Margin="25,115,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ComboBox_PasswordType" Margin="141,115,175,0" SelectedIndex="0" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="WPA/WPA2"></ComboBoxItem>
+                <ComboBoxItem Content="WEP"></ComboBoxItem>
+            </ComboBox>
+            <Label x:Name="Label_IsHiddenNetwork" Content="{DynamicResource ishiddennetwork}" HorizontalAlignment="Left" Margin="27,145,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CheckBox_IsHiddenNetwork" HorizontalAlignment="Left" Margin="141,151,0,0" VerticalAlignment="Top" Unchecked="CheckBox_IsHiddenNetwork_Checked" Checked="CheckBox_IsHiddenNetwork_Checked"/>
+            <Label x:Name="Label_Warning" Foreground="Red" Content="{DynamicResource networkwarning}" HorizontalAlignment="Left" Margin="141,25,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Page>

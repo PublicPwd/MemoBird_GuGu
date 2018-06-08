@@ -1,4 +1,4 @@
-﻿namespace QRCoder
+﻿namespace MemoBird_GuGu.OpenLibrary.QRCoder
 {
     public abstract class AbstractQRCode<T>
     {

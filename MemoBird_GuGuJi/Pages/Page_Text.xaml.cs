@@ -1,6 +1,7 @@
 ﻿using MemoBird_GuGu.Classes;
-using MemoBird_GuGu.OpenLibrary.ggApi;
 using MemoBird_GuGu.Utils;
+using MemoBird_GuGu.Utils.WebApi;
+using MemoBird_GuGu.Windows;
 using System;
 using System.Drawing.Text;
 using System.IO;
@@ -30,20 +31,17 @@ namespace MemoBird_GuGu.Pages
         /// </summary>
         private void PrintPaper()
         {
-            string content;
-            string memobirdID;
-            string str;
-            string printcontentid;
             try
             {
-                memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
-                str = ggApiHelper.UserBind(memobirdID, "0");
+                string memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
+                string str;
+                string content;
 
                 bool editModeIsNormal = ComboBox_EditMode.SelectedIndex == 0 ? true : false;
                 if (editModeIsNormal)
                 {
                     content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(new TextRange(RichTextBox_Content.Document.ContentStart, RichTextBox_Content.Document.ContentEnd).Text));
-                    str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                    str = WebApiHelper.PrintPaper(content, memobirdID);
                 }
                 else
                 {
@@ -55,11 +53,11 @@ namespace MemoBird_GuGu.Pages
                         content = Convert.ToBase64String(Encoding.Default.GetBytes(content));
                     }
                     content = System.Web.HttpUtility.UrlEncode(content);
-                    str = ggApiHelper.PrintHtml(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
+                    str = WebApiHelper.PrintPaperFromHtml(content, memobirdID);
                     content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(textRange.Text));
                 }
 
-                if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code") == "1")
+                if (Parsing.GetValueFromJsonString(str, "showapi_res_code") == "1")
                 {
                     FileX.SaveHistory(memobirdID, content);
                 }
@@ -75,10 +73,6 @@ namespace MemoBird_GuGu.Pages
             finally
             {
                 new TextRange(RichTextBox_Content.Document.ContentStart, RichTextBox_Content.Document.ContentEnd).Text = string.Empty;
-                content = string.Empty;
-                memobirdID = string.Empty;
-                str = string.Empty;
-                printcontentid = string.Empty;
                 GC.Collect();
             }
         }
@@ -122,6 +116,7 @@ namespace MemoBird_GuGu.Pages
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
+            new Window_Tip(FindResource("printing").ToString()).Show();
             PrintPaper();
         }
 
@@ -129,19 +124,13 @@ namespace MemoBird_GuGu.Pages
         {
             if (ComboBox_EditMode.SelectedIndex == 0)
             {
-                Label_FontFamily.Visibility = Visibility.Hidden;
-                ComboBox_FontFamily.Visibility = Visibility.Hidden;
-                Label_FontSize.Visibility = Visibility.Hidden;
-                ComboBox_FontSize.Visibility = Visibility.Hidden;
+                Grid_Advance.Visibility = Visibility.Hidden;
                 RichTextBox_Content.SelectAll();
                 RichTextBox_Content.Selection.ClearAllProperties();
             }
             else
             {
-                Label_FontFamily.Visibility = Visibility.Visible;
-                ComboBox_FontFamily.Visibility = Visibility.Visible;
-                Label_FontSize.Visibility = Visibility.Visible;
-                ComboBox_FontSize.Visibility = Visibility.Visible;
+                Grid_Advance.Visibility = Visibility.Visible;
             }
         }
 

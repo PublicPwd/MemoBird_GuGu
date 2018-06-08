@@ -1,5 +1,4 @@
-﻿using QRCoder;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace MemoBird_GuGu.OpenLibrary.QRCoder
 {

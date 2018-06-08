@@ -74,6 +74,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\HttpHelper.cs" />
+    <Compile Include="Utils\WebApi\WebApi.cs" />
+    <Compile Include="Utils\WebApi\WebApiHelper.cs" />
+    <Compile Include="Windows\Window_Tip.xaml.cs">
+      <DependentUpon>Window_Tip.xaml</DependentUpon>
+    </Compile>
     <Page Include="Pages\Page_Device.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,7 +134,6 @@
     </Compile>
     <Compile Include="Classes\AboutInfo.cs" />
     <Compile Include="Classes\History.cs" />
-    <Compile Include="OpenLibrary\ggApi\GGConfig.cs" />
     <Compile Include="Classes\DeviceDetails.cs" />
     <Compile Include="Classes\DeviceList.cs" />
     <Compile Include="Classes\ProgramInfo.cs" />
@@ -152,9 +157,6 @@
     <Compile Include="Pages\Page_Text.xaml.cs">
       <DependentUpon>Page_Text.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OpenLibrary\ggApi\Apis.cs" />
-    <Compile Include="OpenLibrary\ggApi\ggApiHelper.cs" />
-    <Compile Include="OpenLibrary\ggApi\HttpWebResponseUtility.cs" />
     <Compile Include="Pages\Page_TextAndImage.xaml.cs">
       <DependentUpon>Page_TextAndImage.xaml</DependentUpon>
     </Compile>
@@ -178,6 +180,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\zh-cn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Window_Tip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

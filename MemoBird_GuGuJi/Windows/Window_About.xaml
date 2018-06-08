@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{DynamicResource title}" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" BorderBrush="#FF576069" BorderThickness="10">
     <Grid Background="#FFFFF5F7" MouseDown="Grid_MouseDown">
-        <Label Content="{DynamicResource version}" HorizontalAlignment="Left" Margin="33,30,0,0" FontSize="20" VerticalAlignment="Top"/>
+        <Label x:Name="Label_Title" Content="{DynamicResource version}" HorizontalAlignment="Left" Margin="33,30,0,0" FontSize="20" VerticalAlignment="Top"/>
         <Label Content="" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" BorderThickness="0,1,0,0" BorderBrush="#FF576069" Foreground="{x:Null}" Width="427"/>
         <Button x:Name="Button_Submit" Content="{DynamicResource ok}" HorizontalAlignment="Left" Margin="385,235,0,0" VerticalAlignment="Top" Width="75" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Submit_Click"/>
         <Label Content="{DynamicResource memobirdid}" HorizontalAlignment="Left" Margin="33,80,0,0" VerticalAlignment="Top"/>

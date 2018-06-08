@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace QRCoder
+namespace MemoBird_GuGu.OpenLibrary.QRCoder
 {
     public class QRCodeGenerator : IDisposable
     {

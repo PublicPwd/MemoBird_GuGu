@@ -1,10 +1,10 @@
 ﻿using MemoBird_GuGu.Classes;
 using MemoBird_GuGu.OpenLibrary.ggApi;
 using MemoBird_GuGu.Utils;
+using MemoBird_GuGu.Utils.WebApi;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,13 +25,9 @@ namespace MemoBird_GuGu.Windows
         /// </summary>
         private void PrintPaper()
         {
-            string content = string.Empty;
-            string memobirdID;
-            string str;
-            string printcontentid;
-            string itemString;
             try
             {
+                string content = string.Empty;
                 for (int i = 0; i < ListBox_List.Items.Count; i++)
                 {
                     if (i != 0)
@@ -40,10 +36,9 @@ namespace MemoBird_GuGu.Windows
                     }
                     content = content + (ListBox_List.Items[i] as ListBoxItem).Tag;
                 }
-                memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
-                str = ggApiHelper.UserBind(memobirdID, "0");
-                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code") == "1")
+                string memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
+                string str = WebApiHelper.PrintPaper(content, memobirdID);
+                if (Parsing.GetValueFromJsonString(str, "showapi_res_code") == "1")
                 {
                     FileX.SaveHistory(memobirdID, content);
                 }
@@ -59,11 +54,6 @@ namespace MemoBird_GuGu.Windows
             finally
             {
                 ListBox_List.Items.Clear();
-                content = string.Empty;
-                memobirdID = string.Empty;
-                str = string.Empty;
-                printcontentid = string.Empty;
-                itemString = string.Empty;
                 GC.Collect();
             }
         }
@@ -84,6 +74,7 @@ namespace MemoBird_GuGu.Windows
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
+            new Window_Tip(FindResource("printing").ToString()).Show();
             PrintPaper();
         }
 
@@ -100,7 +91,7 @@ namespace MemoBird_GuGu.Windows
             ListBoxItem listBoxItem = new ListBoxItem()
             {
                 Content = window_AddText.Text,
-                Tag = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(window_AddText.Text))
+                Tag = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(window_AddText.Text + "\n"))
             };
             ListBox_List.Items.Add(listBoxItem);
         }
@@ -121,7 +112,7 @@ namespace MemoBird_GuGu.Windows
             ListBoxItem listBoxItem = new ListBoxItem()
             {
                 Content = img,
-                Tag = "P:" + base64
+                Tag = "P:" + base64 + "\n"
             };
             ListBox_List.Items.Add(listBoxItem);
         }

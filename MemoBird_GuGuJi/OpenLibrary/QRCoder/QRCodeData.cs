@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace QRCoder
+namespace MemoBird_GuGu.OpenLibrary.QRCoder
 {
     using System;
 

@@ -1,8 +1,9 @@
 ﻿using MemoBird_GuGu.Classes;
 using MemoBird_GuGu.OpenLibrary.ggApi;
 using MemoBird_GuGu.Utils;
+using MemoBird_GuGu.Utils.WebApi;
+using MemoBird_GuGu.Windows;
 using System;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,17 +24,12 @@ namespace MemoBird_GuGu.Pages
         /// </summary>
         private void PrintPaper()
         {
-            string content = string.Empty;
-            string memobirdID;
-            string str;
-            string printcontentid;
             try
             {
-                content = content + "P:" + Image_Content.Tag;
-                memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
-                str = ggApiHelper.UserBind(memobirdID, "0");
-                str = ggApiHelper.PrintPaper(memobirdID, Parsing.GetUserIDFromJsonString(str, "showapi_userid"), content);
-                if (Parsing.GetUserIDFromJsonString(str, "showapi_res_code") == "1")
+                string content = "P:" + Image_Content.Tag;
+                string memobirdID = ComboBox_DeviceList.SelectedValue.ToString();
+                string str = WebApiHelper.PrintPaper(content, memobirdID);
+                if (Parsing.GetValueFromJsonString(str, "showapi_res_code") == "1")
                 {
                     FileX.SaveHistory(memobirdID, content);
                 }
@@ -50,10 +46,6 @@ namespace MemoBird_GuGu.Pages
             {
                 Image_Content.Source = null;
                 Image_Content.Tag = string.Empty;
-                content = string.Empty;
-                memobirdID = string.Empty;
-                str = string.Empty;
-                printcontentid = string.Empty;
                 GC.Collect();
             }
         }
@@ -87,6 +79,7 @@ namespace MemoBird_GuGu.Pages
                 MessageBox.Show(FindResource("pleaseaddcontent").ToString());
                 return;
             }
+            new Window_Tip(FindResource("printing").ToString()).Show();
             PrintPaper();
         }
 
