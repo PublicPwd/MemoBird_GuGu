@@ -22,7 +22,7 @@ namespace MemoBird_GuGu.Utils
                         values.Add(key, parameters[key]);
                     }
                     byte[] buffer = webClient.UploadValues(url, values);
-                    response = Encoding.UTF8.GetString(buffer);
+                    response = Encoding.Default.GetString(buffer);
                 }
             }
             catch (Exception ex)

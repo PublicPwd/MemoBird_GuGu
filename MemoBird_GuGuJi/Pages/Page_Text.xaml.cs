@@ -52,7 +52,6 @@ namespace MemoBird_GuGu.Pages
                         content = Parsing.XamlToHtml(Encoding.UTF8.GetString(stream.ToArray()));
                         content = Convert.ToBase64String(Encoding.Default.GetBytes(content));
                     }
-                    content = System.Web.HttpUtility.UrlEncode(content);
                     str = WebApiHelper.PrintPaperFromHtml(content, memobirdID);
                     content = "T:" + Convert.ToBase64String(Encoding.Default.GetBytes(textRange.Text));
                 }
