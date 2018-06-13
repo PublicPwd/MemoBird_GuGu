@@ -54,4 +54,5 @@
     <s:String x:Key="ishiddennetwork">Hidden Network</s:String>
     <s:String x:Key="networkwarning">WARNING: PEOPLE WILL KNOW YOUR PASSWORD!</s:String>
     <s:String x:Key="printing">Printing!</s:String>
+    <s:String x:Key="reprint">Reprint</s:String>
 </ResourceDictionary>

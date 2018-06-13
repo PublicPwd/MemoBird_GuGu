@@ -1,4 +1,6 @@
 ﻿using MemoBird_GuGu.Classes;
+using MemoBird_GuGu.Utils;
+using MemoBird_GuGu.Utils.WebApi;
 using MemoBird_GuGu.Windows;
 using System;
 using System.Collections.ObjectModel;
@@ -73,8 +75,7 @@ namespace MemoBird_GuGu.Pages
 
         private void DataGrid_List_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var item = DataGrid_List.SelectedItem as History;
-            if (item == null)
+            if (!(DataGrid_List.SelectedItem is History item))
             {
                 return;
             }
@@ -84,6 +85,24 @@ namespace MemoBird_GuGu.Pages
         private void Button_Details_Click(object sender, RoutedEventArgs e)
         {
             DataGrid_List_MouseDoubleClick(null, null);
+        }
+
+        private void Button_Reprint_Click(object sender, RoutedEventArgs e)
+        {
+            if(!(DataGrid_List.SelectedItem is History item))
+            {
+                return;
+            }
+            new Window_Tip(FindResource("printing").ToString()).Show();
+            string str = WebApiHelper.PrintPaper(item.Content, item.Id);
+            if (Parsing.GetValueFromJsonString(str, "showapi_res_code") == "1")
+            {
+                FileX.SaveHistory(item.Id, item.Content);
+            }
+            else
+            {
+                MessageBox.Show(FindResource("printfail").ToString());
+            }
         }
     }
 }

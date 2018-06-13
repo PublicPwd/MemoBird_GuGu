@@ -54,4 +54,5 @@
     <s:String x:Key="ishiddennetwork">是否隐藏网络</s:String>
     <s:String x:Key="networkwarning">扫描者会知道你的密码，慎用！</s:String>
     <s:String x:Key="printing">正在打印！</s:String>
+    <s:String x:Key="reprint">重新打印</s:String>
 </ResourceDictionary>
