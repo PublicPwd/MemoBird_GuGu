@@ -55,4 +55,6 @@
     <s:String x:Key="networkwarning">扫描者会知道你的密码，慎用！</s:String>
     <s:String x:Key="printing">正在打印！</s:String>
     <s:String x:Key="reprint">重新打印</s:String>
+    <s:String x:Key="haveanewversion">有新版本，是否下载？</s:String>
+    <s:String x:Key="downloadsuccess">下载成功！</s:String>
 </ResourceDictionary>

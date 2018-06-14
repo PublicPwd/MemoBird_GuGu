@@ -55,4 +55,6 @@
     <s:String x:Key="networkwarning">WARNING: PEOPLE WILL KNOW YOUR PASSWORD!</s:String>
     <s:String x:Key="printing">Printing!</s:String>
     <s:String x:Key="reprint">Reprint</s:String>
+    <s:String x:Key="haveanewversion">Have a new verion, whether or not to download it?</s:String>
+    <s:String x:Key="downloadsuccess">Download Success!</s:String>
 </ResourceDictionary>

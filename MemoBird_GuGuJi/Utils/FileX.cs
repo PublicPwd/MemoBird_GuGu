@@ -100,5 +100,21 @@ namespace MemoBird_GuGu.Utils
                 return text;
             }
         }
+
+        public static string GetSaveFilePath(string fileName)
+        {
+            string path = string.Empty;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                FileName = Path.GetFileNameWithoutExtension(fileName),
+                DefaultExt = Path.GetExtension(fileName),
+                AddExtension = true
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                path = saveFileDialog.FileName;
+            }
+            return path;
+        }
     }
 }

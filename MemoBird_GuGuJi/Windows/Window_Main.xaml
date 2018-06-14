@@ -1,4 +1,4 @@
-﻿<Window x:Class="MemoBird_GuGu.Window_Main"
+﻿<Window x:Class="MemoBird_GuGu.Windows.Window_Main"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{DynamicResource title}" MinHeight="500" MinWidth="850" Height="500" Width="850" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FFF3F4F6">

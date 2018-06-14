@@ -1,6 +1,5 @@
 ﻿using MemoBird_GuGu.Classes;
 using MemoBird_GuGu.Pages;
-using MemoBird_GuGu.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -8,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace MemoBird_GuGu
+namespace MemoBird_GuGu.Windows
 {
     public partial class Window_Main : Window
     {

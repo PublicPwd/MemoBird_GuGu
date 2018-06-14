@@ -89,7 +89,7 @@ namespace MemoBird_GuGu.Pages
 
         private void Button_Reprint_Click(object sender, RoutedEventArgs e)
         {
-            if(!(DataGrid_List.SelectedItem is History item))
+            if (!(DataGrid_List.SelectedItem is History item))
             {
                 return;
             }
