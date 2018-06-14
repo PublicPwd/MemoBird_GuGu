@@ -19,7 +19,7 @@ namespace MemoBird_GuGu.Classes
         /// </summary>
         public static readonly string History = File + @"\History";
         
-        public const string UpdateUrl = "https://api.github.com/repos/PublicPwd/MemoBird_GuGuJi/releases/latest";
+        public const string UpdateUrl = "https://api.github.com/repos/PublicPwd/MemoBird_GuGu/releases/latest";
 
         public const string UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36";
     }

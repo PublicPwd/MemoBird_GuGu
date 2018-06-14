@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoBird_GuGu", "MemoBird_GuGuJi\MemoBird_GuGu.csproj", "{C85488A0-BB15-4026-B195-C706FF23B557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoBird_GuGu", "MemoBird_GuGu\MemoBird_GuGu.csproj", "{C85488A0-BB15-4026-B195-C706FF23B557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
