@@ -12,8 +12,6 @@
     <s:String x:Key="cancel">取消</s:String>
     <s:String x:Key="memobirdid">作者咕咕号：648509</s:String>
     <s:String x:Key="thanks">感谢：</s:String>
-    <s:String x:Key="url1">gugu-.net</s:String>
-    <s:String x:Key="url2">QRCoder</s:String>
     <s:String x:Key="name">设备名称</s:String>
     <s:String x:Key="id">设备编号</s:String>
     <s:String x:Key="default">设为默认</s:String>
@@ -57,4 +55,8 @@
     <s:String x:Key="reprint">重新打印</s:String>
     <s:String x:Key="haveanewversion">有新版本，是否下载？</s:String>
     <s:String x:Key="downloadsuccess">下载成功！</s:String>
+    <s:String x:Key="clearhistory">清空历史</s:String>
+    <s:String x:Key="confirmtoclearhistory">确认清空历史记录！</s:String>
+    <s:String x:Key="occupiedspace">已占用空间：</s:String>
+    <s:String x:Key="clearsuccess">清理成功！</s:String>
 </ResourceDictionary>

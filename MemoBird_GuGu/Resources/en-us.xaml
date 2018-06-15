@@ -12,8 +12,6 @@
     <s:String x:Key="cancel">Cancel</s:String>
     <s:String x:Key="memobirdid">Author MemoBird ID: 648509</s:String>
     <s:String x:Key="thanks">Thanks:</s:String>
-    <s:String x:Key="url1">gugu-.net</s:String>
-    <s:String x:Key="url2">QRCoder</s:String>
     <s:String x:Key="name">Name</s:String>
     <s:String x:Key="id">ID</s:String>
     <s:String x:Key="default">Default</s:String>
@@ -57,4 +55,8 @@
     <s:String x:Key="reprint">Reprint</s:String>
     <s:String x:Key="haveanewversion">Have a new verion, whether or not to download it?</s:String>
     <s:String x:Key="downloadsuccess">Download Success!</s:String>
+    <s:String x:Key="clearhistory">ClearHistory</s:String>
+    <s:String x:Key="confirmtoclearhistory">Confirm to clear history!</s:String>
+    <s:String x:Key="occupiedspace">Occupied space: </s:String>
+    <s:String x:Key="clearsuccess">Clear success!</s:String>
 </ResourceDictionary>

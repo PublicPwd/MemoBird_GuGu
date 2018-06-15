@@ -56,6 +56,11 @@ namespace MemoBird_GuGu.Windows
             Process.Start(AboutInfo.QRCoderURL);
         }
 
+        private void Label_url3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(AboutInfo.MemoBird_GuGu);
+        }
+
         #endregion
     }
 }

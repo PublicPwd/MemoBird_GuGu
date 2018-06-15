@@ -22,5 +22,6 @@
         </DataGrid>
         <Button x:Name="Button_Details" Content="{DynamicResource details}" Margin="0,75,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Details_Click" HorizontalAlignment="Right" Width="100"/>
         <Button x:Name="Button_Reprint" Content="{DynamicResource reprint}" Margin="0,125,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Reprint_Click" HorizontalAlignment="Right" Width="100"/>
+        <Button x:Name="Button_ClearHistory" Content="{DynamicResource clearhistory}" Margin="0,175,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_ClearHistory_Click" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Page>

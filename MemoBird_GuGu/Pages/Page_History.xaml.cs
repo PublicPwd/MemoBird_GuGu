@@ -104,5 +104,19 @@ namespace MemoBird_GuGu.Pages
                 MessageBox.Show(FindResource("printfail").ToString());
             }
         }
+
+        private void Button_ClearHistory_Click(object sender, RoutedEventArgs e)
+        {
+            double size = FileX.GetDirectorySize(ProgramInfo.History) / 1024.0 / 1024.0;
+            string message = FindResource("confirmtoclearhistory").ToString() + "\n\n" + FindResource("occupiedspace") + size.ToString("0.0000") + " MB";
+            if (MessageBox.Show(message, string.Empty, MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+            if (FileX.DeleteDirectory(ProgramInfo.History, true))
+            {
+                MessageBox.Show(FindResource("clearsuccess").ToString());
+            }
+        }
     }
 }

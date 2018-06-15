@@ -116,5 +116,33 @@ namespace MemoBird_GuGu.Utils
             }
             return path;
         }
+
+        public static bool DeleteDirectory(string path, bool recursive)
+        {
+            try
+            {
+                Directory.Delete(path, recursive);
+            }
+            catch { }
+            return !Directory.Exists(path);
+        }
+
+        public static ulong GetDirectorySize(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                return 0;
+            }
+            ulong size = 0;
+            foreach (DirectoryInfo dir in new DirectoryInfo(path).GetDirectories())
+            {
+                size = size + GetDirectorySize(dir.FullName);
+            }
+            foreach (FileInfo file in new DirectoryInfo(path).GetFiles())
+            {
+                size = size + (ulong)file.Length;
+            }
+            return size;
+        }
     }
 }
