@@ -5,41 +5,36 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace MemoBird_GuGu.Windows
 {
     public partial class Window_Main : Window
     {
+        private Page_Device page_Device = new Page_Device();
+        private Page_History page_History = new Page_History();
+        private Page_Image page_Image = new Page_Image();
+        private Page_QRCode page_QRCode = new Page_QRCode();
+        private Page_Text page_Text = new Page_Text();
+        private Page_TextAndImage page_TextAndImage = new Page_TextAndImage();
+
         public Window_Main()
         {
             InitializeComponent();
             DeviceList.Load();
-            Frame_Pages.Content = new Page_Text();
+            Label_Text_MouseDown(Label_Text, null);
         }
 
         #region Private Function
 
-        /// <summary>
-        /// 高亮显示当前点击的选项卡
-        /// </summary>
-        /// <param name="currentLabel">当前点击的选项卡</param>
-        private void HightLightTheCurrentTab(object currentLabel)
+        private void ShowPage(Page page, object label)
         {
-            SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(0xF3, 0xF4, 0xF6));
-            Label_Text.Foreground = brush;
-            Label_Image.Foreground = brush;
-            Label_TextAndImage.Foreground = brush;
-            Label_QRCode.Foreground = brush;
-            Label_More.Foreground = brush;
+            Frame_Pages.Content = page;
 
-            brush = new SolidColorBrush(Color.FromRgb(0xF7, 0x44, 0x61));
-            Label label = currentLabel as Label;
-            label.Foreground = brush;
-
-            Grid_Nav.Margin = new Thickness(label.Margin.Left, 45, 0, 0);
-
-            brush = null;
+            foreach (Label l in StackPanel_Menu.Children)
+            {
+                l.BorderThickness = new Thickness(0);
+            }
+            (label as Label).BorderThickness = new Thickness(0, 0, 0, 5);
         }
 
         /// <summary>
@@ -104,85 +99,39 @@ namespace MemoBird_GuGu.Windows
             WindowState = WindowState.Minimized;
         }
 
-        private void Label_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Label).FontSize = 25;
-        }
-
-        private void Label_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Label).FontSize = 16;
-        }
-
-        private void Label_More_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Label_Device.Visibility = Visibility.Visible;
-            Label_History.Visibility = Visibility.Visible;
-            (sender as Label).FontSize = 25;
-        }
-
-        private void Label_More_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Label).FontSize = 16;
-            double x = e.GetPosition(null).X;
-            double y = e.GetPosition(null).Y;
-            if (x >= 550 && x <= 650 && y <= 150)
-            {
-                return;
-            }
-            Label_Device.Visibility = Visibility.Hidden;
-            Label_History.Visibility = Visibility.Hidden;
-        }
-
-        private void Label_About_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Label_About.Content = FindResource("about");
-        }
-
-        private void Label_About_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Label_About.Content = FindResource("title");
-        }
-
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Label_Language_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ChangeTheLanguage();
         }
 
         private void Label_Text_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = new Page_Text();
+            ShowPage(page_Text, sender);
         }
 
         private void Label_Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = new Page_Image();
+            ShowPage(page_Image, sender);
         }
 
         private void Label_TextAndImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = new Page_TextAndImage();
+            ShowPage(page_TextAndImage, sender);
         }
 
         private void Label_QRCode_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(sender);
-            Frame_Pages.Content = new Page_QRCode();
+            ShowPage(page_QRCode, sender);
         }
 
         private void Label_Device_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(Label_More);
-            Frame_Pages.Content = new Page_Device();
+            ShowPage(page_Device, sender);
         }
 
         private void Label_History_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            HightLightTheCurrentTab(Label_More);
-            Frame_Pages.Content = new Page_History();
+            ShowPage(page_History, sender);
         }
 
         private void Label_About_MouseDown(object sender, MouseButtonEventArgs e)
