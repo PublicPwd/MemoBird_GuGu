@@ -7,7 +7,7 @@
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="Grid">
         <Border Margin="25,25,175,55" BorderThickness="1" Background="White" BorderBrush="#FFABADB3">
-            <Image x:Name="Image_Content" Margin="0,0,-2,-2"/>
+            <Image x:Name="Image_Content" Margin="0,0,-2,-2" Tag=""/>
         </Border>
         <Button x:Name="Button_Send" Content="{DynamicResource send}" Margin="0,25,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Send_Click" HorizontalAlignment="Right" Width="100"/>
         <Button x:Name="Button_Image" Content="{DynamicResource image}" Margin="0,75,40,0" VerticalAlignment="Top" Height="30" Background="#FF576069" BorderBrush="{x:Null}" Foreground="#FFF3F4F6" FontSize="16" Click="Button_Image_Click" HorizontalAlignment="Right" Width="100"/>
