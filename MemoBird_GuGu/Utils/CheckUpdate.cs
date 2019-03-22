@@ -36,7 +36,7 @@ namespace MemoBird_GuGu.Utils
             {
                 ResponseString = e.Result;
                 string tagName = GetTagName();
-                if (!IsNewVersion(tagName))
+                if (IsNewVersion(tagName))
                 {
                     return;
                 }
@@ -86,18 +86,8 @@ namespace MemoBird_GuGu.Utils
 
         private static bool IsNewVersion(string version)
         {
-            bool bRe = false;
-            List<string> localVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.').ToList();
-            List<string> remoteVersion = version.Split('.').ToList();
-            for (int i = 0; i < 4; i++)
-            {
-                if (int.Parse(remoteVersion[i]) > int.Parse(localVersion[i]))
-                {
-                    bRe = true;
-                    break;
-                }
-            }
-            return bRe;
+            string localVerion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            return localVerion == version ? true : false;
         }
 
         private static void DownloadFile(string url, string fileName)

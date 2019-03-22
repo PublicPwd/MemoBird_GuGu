@@ -12,28 +12,12 @@ namespace MemoBird_GuGu.Windows
         {
             InitializeComponent();
             Label_Title.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            ShowLog();
+            TextBox_Log.Text = AboutInfo.Log_zh_cn;
         }
-
-        #region Private Function
-
-        private void ShowLog()
-        {
-            if (Button_Submit.Content.Equals("OK"))
-            {
-                TextBox_Log.Text = AboutInfo.Log_en_us;
-            }
-            else
-            {
-                TextBox_Log.Text = AboutInfo.Log_zh_cn;
-            }
-        }
-
-        #endregion
 
         #region Event Handlers
 
-        private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
