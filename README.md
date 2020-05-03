@@ -1,6 +1,6 @@
 # MemoBird_GuGu
 这是一个运行在 Windows 上的「咕咕机」打印软件。
-> 什么是「咕咕机」，[点我跳转到「咕咕机」官网](http://www.memobird.cn/)
+> 什么是「咕咕机」？[点我跳转到「咕咕机」官网](http://www.memobird.cn/)
 
 这是个人项目，非官方项目，但官方也提供了相关的开发文档，详见[「咕咕机」开放平台](https://open.memobird.cn/)。
 
@@ -97,9 +97,9 @@ MemoBird_GuGu
 
 点击右侧【重新打印】，打印选中的历史记录。
 
-![二维码](https://github.com/PublicPwd/MemoBird_GuGu/raw/master/MemoBird_GuGu/images/%E5%8E%86%E5%8F%B2.png "二维码")
+![历史](https://github.com/PublicPwd/MemoBird_GuGu/raw/master/MemoBird_GuGu/images/%E5%8E%86%E5%8F%B2.png "历史")
 
-## 三方库（感谢）：
+## 三方库（感谢）
 gugu-.net: 实现图像二值化。
 ```
 https://github.com/memobird/gugu-.net
